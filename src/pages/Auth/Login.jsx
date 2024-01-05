@@ -1,43 +1,36 @@
 import "./Auth.scss";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
+import { Col, Container, Form, Row } from "react-bootstrap";
+import CustomInput from "../../components/CustomInput";
 
 const Login = () => {
   return (
     <div className="auth-wrapper">
-      <div className="container-xxl">
-        <div className="row">
-          <div className="col-12">
+      <Container>
+        <Row>
+          <Col>
             <div className="auth-card bg-white my-3 mx-auto">
               <h3 className="py-2">Login</h3>
               <p className="pb-4">
                 Sign in to access your account and continue.
               </p>
-              <form>
+
+              <Form>
                 {/* Email */}
-                <div className="form-floating mb-3">
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="floatingEmail"
-                    placeholder="Email"
-                    name="email"
-                    autoComplete="email"
-                  />
-                  <label htmlFor="floatingEmail">Email</label>
-                </div>
+                <CustomInput
+                  id="floatingEmail"
+                  label="Email"
+                  type="email"
+                  className=""
+                />
 
                 {/* Password */}
-                <div className="form-floating mb-3">
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="floatingPassword"
-                    placeholder="Password"
-                    name="password"
-                    autoComplete="current-password"
-                  />
-                  <label htmlFor="floatingPassword">Password</label>
-                </div>
+                <CustomInput
+                  id="floatingPassword"
+                  label="Password"
+                  type="password"
+                />
 
                 {/* Forgot Password */}
                 <div className="text-start my-3">
@@ -45,15 +38,16 @@ const Login = () => {
                 </div>
 
                 {/* Button */}
-                <div className="d-flex justify-content-center mt-5">
-                  {/* 1 */}
-                  <button className="button border-0 w-50">Login</button>
+                <div>
+                  <button type="submit" className="button border-0 w-50 mt-4">
+                    Login
+                  </button>
                 </div>
-              </form>
+              </Form>
             </div>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };

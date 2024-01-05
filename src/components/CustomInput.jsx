@@ -1,24 +1,20 @@
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
+import { FloatingLabel, Form } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-// const CustomInput = ({ type, className, id, label }) => {
-//   return (
-//     <div className="form-floating mb-3">
-//       <input
-//         type={type}
-//         className={`form-control ${className}`}
-//         id={id}
-//         placeholder={label}
-//         name="email"
-//       />
-//     </div>
-//   );
-// };
+const CustomInput = ({ type, className, id, label }) => {
+  return (
+    <FloatingLabel controlId={id} label={label} className={`mb-3 ${className}`}>
+      <Form.Control type={type} placeholder={label} />
+    </FloatingLabel>
+  );
+};
 
-// CustomInput.propTypes = {
-//   type: PropTypes.string,
-//   className: PropTypes.string,
-//   id: PropTypes.string,
-//   label: PropTypes.string,
-// };
+CustomInput.propTypes = {
+  type: PropTypes.string,
+  className: PropTypes.string,
+  id: PropTypes.string,
+  label: PropTypes.string,
+};
 
-// export default CustomInput;
+export default CustomInput;

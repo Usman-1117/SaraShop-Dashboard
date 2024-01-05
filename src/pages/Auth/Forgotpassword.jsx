@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import { Col, Container, Form, Row } from "react-bootstrap";
+import CustomInput from "../../components/CustomInput";
 
 const ForgotPassword = () => {
   return (
     <>
       <div className="auth-wrapper py-5">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-12">
+        <Container>
+          <Row>
+            <Col lg={12}>
               <div className="auth-card forgot-password-card bg-white my-5 mx-auto">
                 <h3 className="py-2">Forgot Password</h3>
                 <p className="pb-4">
@@ -14,24 +18,18 @@ const ForgotPassword = () => {
                 </p>
 
                 {/* Form */}
-                <form>
+                <Form>
                   {/* Email */}
-                  <div className="form-floating mb-3">
-                    <input
-                      type="email"
-                      className="form-control"
-                      id="floatingEmail"
-                      placeholder="Email"
-                      name="email"
-                      autoComplete="email"
-                    />
-                    <label htmlFor="floatingEmail">Email</label>
-                  </div>
+                  <CustomInput
+                    id="floatingEmail"
+                    label="Password"
+                    type="email"
+                  />
 
                   {/* Button */}
                   <div
-                    className="d-flex flex-column gap-10 text-center 
-                  align-items-center justify-content-center mt-5"
+                    className="d-flex flex-column gap-10 
+                  align-items-center mt-5"
                   >
                     {/* 1 */}
                     <button type="submit" className="button border-0">
@@ -42,11 +40,11 @@ const ForgotPassword = () => {
                       Cancel
                     </Link>
                   </div>
-                </form>
+                </Form>
               </div>
-            </div>
-          </div>
-        </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
     </>
   );

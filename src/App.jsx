@@ -1,5 +1,3 @@
-import "./App.scss";
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 // Auth
 import Login from "./pages/Auth/Login";
