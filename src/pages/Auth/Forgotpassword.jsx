@@ -20,11 +20,7 @@ const ForgotPassword = () => {
                 {/* Form */}
                 <Form>
                   {/* Email */}
-                  <CustomInput
-                    id="floatingEmail"
-                    label="Password"
-                    type="email"
-                  />
+                  <CustomInput id="floatingEmail" label="Email" type="email" />
 
                   {/* Button */}
                   <div

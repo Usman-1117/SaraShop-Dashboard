@@ -1,17 +1,21 @@
 import "./MainLayout.scss";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 // React Icons
 import { AiOutlineDashboard, AiOutlineUser } from "react-icons/ai";
 import { TbBrandStripe, TbZoomInArea } from "react-icons/tb";
 import { BiCategory, BiSolidColorFill } from "react-icons/bi";
 import { FaBloggerB } from "react-icons/fa6";
-import { IoBagAddOutline } from "react-icons/io5";
+// import { FaUser } from "react-icons/fa";
+import { LuUserCircle2 } from "react-icons/lu";
+
+import { IoBagAddOutline, IoLogoStencil } from "react-icons/io5";
 import {
   MdOutlineProductionQuantityLimits,
   MdFormatListBulletedAdd,
   MdAddToQueue,
+  MdNotificationsActive,
 } from "react-icons/md";
 
 // Ant Design Imports
@@ -30,8 +34,17 @@ const MainLayout = () => {
 
   return (
     <Layout className="min-vh-100">
+      {/* Side Menu */}
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="demo-logo-vertical py-3 text-white text-center">SaraShop</div>
+        {/*side Logo */}
+        <div className="logo ">
+          <h2 className="d-flex align-items-center p-3 text-white text-center justify-content-center">
+            <IoLogoStencil fontSize={30} className="sm-logo" />
+            <span className="lg-logo">SaraShop</span>
+          </h2>
+        </div>
+        {/* Side Logo End*/}
+
         <Menu
           theme="dark"
           mode="inline"
@@ -46,17 +59,17 @@ const MainLayout = () => {
           items={[
             {
               key: "",
-              icon: <AiOutlineDashboard className="fs-5" />,
+              icon: <AiOutlineDashboard className="fs-4" />,
               label: "Dashboard",
             },
             {
               key: "customers",
-              icon: <AiOutlineUser className="fs-5" />,
+              icon: <AiOutlineUser className="fs-4" />,
               label: "Customers",
             },
             {
               key: "catalog",
-              icon: <MdOutlineProductionQuantityLimits className="fs-5" />,
+              icon: <MdOutlineProductionQuantityLimits className="fs-4" />,
               label: "Catalog",
               children: [
                 {
@@ -103,12 +116,12 @@ const MainLayout = () => {
             },
             {
               key: "orders",
-              icon: <MdFormatListBulletedAdd className="fs-5" />,
+              icon: <MdFormatListBulletedAdd className="fs-4" />,
               label: "Orders",
             },
             {
               key: "blogs",
-              icon: <FaBloggerB className="fs-5" />,
+              icon: <FaBloggerB className="fs-4" />,
               label: "Blogs",
               children: [
                 {
@@ -135,15 +148,17 @@ const MainLayout = () => {
             },
             {
               key: "enquires",
-              icon: <TbZoomInArea className="fs-5" />,
+              icon: <TbZoomInArea className="fs-4" />,
               label: "Enquires",
             },
           ]}
         />
       </Sider>
+      {/* Side Menu ENd*/}
 
       <Layout>
         <Header
+          className="d-flex justify-content-between ps-1 pe-4"
           style={{
             padding: 0,
             background: colorBgContainer,
@@ -159,6 +174,27 @@ const MainLayout = () => {
               height: 64,
             }}
           />
+          {/* User Info Side */}
+          <div className=" d-flex align-items-center gap-5">
+            <div className="notification-icon position-relative">
+              <MdNotificationsActive fontSize={28} />
+              <span className="position-absolute badge bg-warning rounded-circle p-2">
+                3
+              </span>
+            </div>
+
+            <div className="d-flex align-items-center gap-2">
+              <div>
+                <LuUserCircle2 fontSize={36} />
+              </div>
+
+              <div>
+                <h5>Muhammad Usman</h5>
+                <p>muhammad.usman@gmail.com</p>
+              </div>
+            </div>
+          </div>
+          {/* User Info Side End*/}
         </Header>
         <Content
           style={{
@@ -169,7 +205,7 @@ const MainLayout = () => {
             borderRadius: borderRadiusLG,
           }}
         >
-          Content
+          <Outlet />
         </Content>
       </Layout>
     </Layout>

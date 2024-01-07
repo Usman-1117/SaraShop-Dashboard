@@ -1,18 +1,54 @@
 .ant-layout {
   .ant-layout-sider {
-    flex: 0 0 200px !important;
-    max-width: 250px !important;
-    min-width: 250px !important;
-    width: 200px !important;
+    max-width: 240px !important;
+    min-width: 240px !important;
+  }
 
-}
-.ant-layout-sider-collasped {
-  flex: 0 0 200px !important;
-  max-width: 80px !important;
-  min-width: 80px !important;
-  width: 200px !important;
-}
+  .logo {
+    .sm-logo {
+      display: none;
+    }
+  }
+
+  .ant-layout-sider-collapsed {
+    max-width: 80px !important;
+    min-width: 80px !important;
+    .sm-logo {
+      display: block;
+    }
+    .lg-logo {
+      display: none;
+    }
+  }
+
   .main {
     overflow-y: scroll;
+  }
+
+  .anticon svg {
+    font-size: 24px;
+  }
+
+  .ant-menu-title-content {
+    font-size: 16px;
+  }
+
+  .ant-layout-header {
+    h5 {
+      line-height: 20px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    p {
+      line-height: 20px;
+      font-size: 14px;
+    }
+
+    .notification-icon {
+      top: 5px;
+      right: -2px;
+      font-size: 16px;
+    }
   }
 }
