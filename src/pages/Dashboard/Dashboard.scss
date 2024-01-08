@@ -1,0 +1,18 @@
+.ant-layout-content {
+  background-color: transparent !important;
+  height: 78vh !important;
+
+  &::-webkit-scrollbar {
+    width: 0 !important;
+  }
+
+  .dashboard-container {
+    .green {
+      color: green;
+    }
+
+    .red {
+      color: red;
+    }
+  }
+}

@@ -147,9 +147,9 @@ const MainLayout = () => {
               ],
             },
             {
-              key: "enquires",
+              key: "enquiries",
               icon: <TbZoomInArea className="fs-4" />,
-              label: "Enquires",
+              label: "Enquiries",
             },
           ]}
         />
@@ -198,7 +198,7 @@ const MainLayout = () => {
         </Header>
         <Content
           style={{
-            margin: "24px 16px",
+            margin: "0px 16px",
             padding: 24,
             minHeight: 280,
             background: colorBgContainer,
