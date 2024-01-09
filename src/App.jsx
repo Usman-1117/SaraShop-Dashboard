@@ -17,6 +17,11 @@ import CategoryList from "./pages/CategoryList/CategoryList";
 import BrandList from "./pages/BrandList/BrandList";
 import ProductList from "./pages/ProductList/ProductList";
 import AddBlog from "./pages/AddBlog/AddBlog";
+import AddBlogCat from "./pages/AddBlogCat/AddBlogCat";
+import AddColor from "./pages/AddColor";
+import AddCategory from "./pages/AddCategory";
+import AddBrand from "./pages/AddBrand";
+import AddProduct from "./pages/AddProduct";
 
 const App = () => {
   return (
@@ -33,7 +38,12 @@ const App = () => {
             <Route index element={<Dashboard />} />
             <Route path="customers" element={<Customers />} />
             <Route path="orders" element={<Orders />} />
+            <Route path="product" element={<AddProduct />} />
+            <Route path="brand" element={<AddBrand />} />
+            <Route path="category" element={<AddCategory />} />
+            <Route path="color" element={<AddColor />} />
             <Route path="blog" element={<AddBlog />} />
+            <Route path="blog-category" element={<AddBlogCat />} />
             <Route path="blog-list" element={<Bloglist />} />
             <Route path="blog-category-list" element={<BlogCatlist />} />
             <Route path="enquiries" element={<Enquiries />} />
