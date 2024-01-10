@@ -1,4 +1,3 @@
-import "./BlogCatlist.jsx.scss";
 import { Table } from "antd";
 
 const columns = [
@@ -28,10 +27,10 @@ for (let i = 0; i < 46; i++) {
     address: `London, Park Lane no. ${i}`,
   });
 }
-const BlogCatlist = () => {
+const Enquiries = () => {
   return (
     <div>
-      <h3 className="mb-4">Blog Categories</h3>
+      <h3 className="mb-4 title">Enquiries</h3>
       <div>
         <Table columns={columns} dataSource={data1} />
       </div>
@@ -39,4 +38,4 @@ const BlogCatlist = () => {
   );
 };
 
-export default BlogCatlist;
+export default Enquiries;

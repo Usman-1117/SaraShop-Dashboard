@@ -3,29 +3,31 @@ import CustomInput from "../components/CustomInput";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
-import { InboxOutlined } from "@ant-design/icons";
-import { message, Upload } from "antd";
+import ImageUpload from "../components/ImageUpload";
 
-const { Dragger } = Upload;
-const props = {
-  name: "file",
-  multiple: true,
-  action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-  onDrop(e) {
-    console.log("Dropped files", e.dataTransfer.files);
-  },
-};
+// import { InboxOutlined } from "@ant-design/icons";
+// import { message, Upload } from "antd";
+
+// const { Dragger } = Upload;
+// const props = {
+//   name: "file",
+//   multiple: true,
+//   action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
+//   onChange(info) {
+//     const { status } = info.file;
+//     if (status !== "uploading") {
+//       console.log(info.file, info.fileList);
+//     }
+//     if (status === "done") {
+//       message.success(`${info.file.name} file uploaded successfully.`);
+//     } else if (status === "error") {
+//       message.error(`${info.file.name} file upload failed.`);
+//     }
+//   },
+//   onDrop(e) {
+//     console.log("Dropped files", e.dataTransfer.files);
+//   },
+// };
 
 const AddProduct = () => {
   const [desc, setDesc] = useState("");
@@ -89,7 +91,7 @@ const AddProduct = () => {
         />
 
         {/* Upload Img */}
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <Dragger {...props}>
             <p className="ant-upload-drag-icon">
               <InboxOutlined />
@@ -102,7 +104,9 @@ const AddProduct = () => {
               uploading company data or other banned files.
             </p>
           </Dragger>
-        </div>
+        </div> */}
+        <ImageUpload />
+
         {/* Button */}
         <div className="py-5">
           <button className="button border-0">Add Product</button>

@@ -1,15 +1,13 @@
 import "./MainLayout.scss";
 import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import userProfile from "../../assets/user.jpg";
 
 // React Icons
 import { AiOutlineDashboard, AiOutlineUser } from "react-icons/ai";
 import { TbBrandStripe, TbZoomInArea } from "react-icons/tb";
 import { BiCategory, BiSolidColorFill } from "react-icons/bi";
 import { FaBloggerB } from "react-icons/fa6";
-// import { FaUser } from "react-icons/fa";
-import { LuUserCircle2 } from "react-icons/lu";
-
 import { IoBagAddOutline, IoLogoStencil } from "react-icons/io5";
 import {
   MdOutlineProductionQuantityLimits,
@@ -21,11 +19,10 @@ import {
 // Ant Design Imports
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Layout, Menu, Button, theme } from "antd";
-
 const { Header, Sider, Content } = Layout;
 
 const MainLayout = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -37,8 +34,8 @@ const MainLayout = () => {
       {/* Side Menu */}
       <Sider trigger={null} collapsible collapsed={collapsed}>
         {/*side Logo */}
-        <div className="logo ">
-          <h2 className="d-flex align-items-center p-3 text-white text-center justify-content-center">
+        <div className="logo">
+          <h2 className=" d-flex justify-content-center p-3 text-white">
             <IoLogoStencil fontSize={30} className="sm-logo" />
             <span className="lg-logo">SaraShop</span>
           </h2>
@@ -174,23 +171,28 @@ const MainLayout = () => {
               height: 64,
             }}
           />
+
           {/* User Info Side */}
           <div className=" d-flex align-items-center gap-5">
+            {/* Notification Icon */}
             <div className="notification-icon position-relative">
               <MdNotificationsActive fontSize={28} />
-              <span className="position-absolute badge bg-warning rounded-circle p-2">
+              <span className="position-absolute badge bg-warning rounded p-2">
                 3
               </span>
             </div>
+            {/* Notification Icon End */}
 
-            <div className="d-flex align-items-center gap-2">
-              <div>
-                <LuUserCircle2 fontSize={36} />
-              </div>
+            <div className="user-info d-flex align-items-center gap-2">
+              <img
+                src={userProfile}
+                alt="user profile"
+                className="user-profile"
+              />
 
-              <div>
-                <h5>Muhammad Usman</h5>
-                <p>muhammad.usman@gmail.com</p>
+              <div className="user-details d-none d-lg-flex flex-column">
+                <h5 className="user-name">Muhammad Usman</h5>
+                <p className="user-email">muhammad.usman@gmail.com</p>
               </div>
             </div>
           </div>
@@ -198,8 +200,6 @@ const MainLayout = () => {
         </Header>
         <Content
           style={{
-            margin: "0px 16px",
-            padding: 24,
             minHeight: 280,
             background: colorBgContainer,
             borderRadius: borderRadiusLG,

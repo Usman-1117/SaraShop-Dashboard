@@ -1,4 +1,3 @@
-import "./Bloglist.scss";
 import { Table } from "antd";
 
 const columns = [

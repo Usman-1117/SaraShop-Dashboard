@@ -42,10 +42,31 @@ const AddBlog = () => {
 
   return (
     <div>
-      <h3 className="mb-4">Add Blog</h3>
-
       <div className="bg-white p-4 rounded-3">
+        <h3 className="mb-4 title">Add Blog</h3>
         <Form>
+          {/* Enter Title */}
+          <CustomInput
+            id="floatingTitle"
+            label="Enter Blog Title"
+            type="text"
+            className="mb-3"
+          />
+
+          {/* Select Category */}
+          <Form.Select className="mb-3">
+            <option value="">Select Blog Category</option>
+          </Form.Select>
+
+          {/* Description */}
+          <div className="mb-4">
+            <ReactQuill
+              style={{ backgroundColor: "white" }}
+              value={desc}
+              onChange={handleDesc}
+            />
+          </div>
+
           {/* Upload Img */}
           <div className="mb-4">
             <Dragger {...props}>
@@ -61,26 +82,6 @@ const AddBlog = () => {
               </p>
             </Dragger>
           </div>
-
-          {/* Enter Title */}
-          <CustomInput
-            id="floatingTitle"
-            label="Enter Blog Title"
-            type="text"
-            className="mb-3"
-          />
-
-          {/* Select Category */}
-          <Form.Select className="mb-3">
-            <option value="">Select Blog Category</option>
-          </Form.Select>
-
-          {/* Description */}
-          <ReactQuill
-            style={{ backgroundColor: "white" }}
-            value={desc}
-            onChange={handleDesc}
-          />
 
           {/* Button */}
           <div className="py-4">

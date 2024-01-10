@@ -1,11 +1,11 @@
-.ant-layout-content {
-  background-color: transparent !important;
-  font-family: var(--base-poppins-font);
-  height: 78vh !important;
+// .ant-layout-content {
+//   background-color: transparent !important;
+//   font-family: var(--base-poppins-font);
+//   height: 78vh !important;
 
-  &::-webkit-scrollbar {
-    width: 0 !important;
-  }
+//   &::-webkit-scrollbar {
+//     width: 0 !important;
+//   }
 
   .dashboard-container {
     .green {
@@ -15,5 +15,8 @@
     .red {
       color: red;
     }
+    .page-title {
+      color: #212529;
+    }
   }
-}
+// }

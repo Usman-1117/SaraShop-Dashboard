@@ -1,5 +1,5 @@
 import { Button, Form } from "react-bootstrap";
-import CustomInput from "../../components/CustomInput";
+import CustomInput from "../components/CustomInput";
 
 const AddBlogCat = () => {
   return (
