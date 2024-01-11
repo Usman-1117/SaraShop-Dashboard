@@ -42,20 +42,23 @@ const AddBlog = () => {
 
   return (
     <div>
-      <div className="bg-white p-4 rounded-3">
-        <h3 className="mb-4 title">Add Blog</h3>
+      <h3 className="page-title mb-3">Add Blog</h3>
+      <div className="bg-white p-2 p-lg-4 rounded-3">
         <Form>
           {/* Enter Title */}
           <CustomInput
             id="floatingTitle"
             label="Enter Blog Title"
             type="text"
-            className="mb-3"
+            className="mb-2"
           />
 
           {/* Select Category */}
-          <Form.Select className="mb-3">
+          <Form.Select className="py-3 mb-3">
             <option value="">Select Blog Category</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
           </Form.Select>
 
           {/* Description */}

@@ -4,17 +4,17 @@ import { Link } from "react-router-dom";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import CustomInput from "../../components/CustomInput";
 
-import AuthImg from "../../assets/Auth_img.svg";
+// import AuthImg from "../../assets/Auth_img.svg";
 
 const Login = () => {
   return (
     <div className="auth-wrapper">
       <Container>
         <Row>
-          <Col lg={6}>
+          <Col>
             <div className="auth-card bg-white my-3 mx-auto">
-              <h3 className="py-2">Login</h3>
-              <p className="pb-4">
+              <h3 className="page-title py-2">Login</h3>
+              <p className="sub-heading pb-4">
                 Sign in to access your account and continue.
               </p>
 
@@ -41,7 +41,7 @@ const Login = () => {
 
                 {/* Button */}
                 <div>
-                  <button type="submit" className="button border-0 w-50 mt-4">
+                  <button type="submit" className="button border-0 w-50 my-2">
                     Login
                   </button>
                 </div>
@@ -49,7 +49,7 @@ const Login = () => {
             </div>
           </Col>
 
-          <Col lg={6}>
+          {/* <Col lg={6}>
             <div className="d-none d-md-none d-lg-block overflow-hidden">
               <img
                 src={AuthImg}
@@ -58,7 +58,7 @@ const Login = () => {
                 style={{ width: "500px" }}
               />
             </div>
-          </Col>
+          </Col> */}
         </Row>
       </Container>
     </div>

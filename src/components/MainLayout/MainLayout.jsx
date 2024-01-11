@@ -1,4 +1,4 @@
-import "./MainLayout.scss";
+// import "./MainLayout.scss";
 import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import userProfile from "../../assets/user.jpg";
@@ -172,7 +172,7 @@ const MainLayout = () => {
             }}
           />
 
-          {/* User Info Side */}
+          {/* User Info header */}
           <div className=" d-flex align-items-center gap-5">
             {/* Notification Icon */}
             <div className="notification-icon position-relative">
@@ -196,7 +196,7 @@ const MainLayout = () => {
               </div>
             </div>
           </div>
-          {/* User Info Side End*/}
+          {/* User Info header End*/}
         </Header>
         <Content
           style={{

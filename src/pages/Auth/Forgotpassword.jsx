@@ -12,8 +12,8 @@ const ForgotPassword = () => {
           <Row>
             <Col lg={12}>
               <div className="auth-card forgot-password-card bg-white my-5 mx-auto">
-                <h3 className="py-2">Forgot Password</h3>
-                <p className="pb-4">
+                <h3 className="page-title py-2">Forgot Password</h3>
+                <p className="sub-heading pb-4">
                   Enter your registered email to reset your password.
                 </p>
 
@@ -25,7 +25,7 @@ const ForgotPassword = () => {
                   {/* Button */}
                   <div
                     className="d-flex flex-column gap-10 
-                  align-items-center mt-5"
+                  align-items-center mt-4"
                   >
                     {/* 1 */}
                     <button type="submit" className="button border-0">

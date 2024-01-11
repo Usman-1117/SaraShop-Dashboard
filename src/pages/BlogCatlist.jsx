@@ -30,8 +30,8 @@ for (let i = 0; i < 46; i++) {
 const BlogCatlist = () => {
   return (
     <div>
-      <h3 className="mb-4">Blog Categories</h3>
-      <div>
+      <h3 className="page-title mb-4">Blog Categories</h3>
+      <div className="table-container">
         <Table columns={columns} dataSource={data1} />
       </div>
     </div>

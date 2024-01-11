@@ -1,4 +1,3 @@
-import "./Dashboard.scss";
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 import { Column } from "@ant-design/plots";
 import { Table } from "antd";
@@ -117,14 +116,16 @@ const Dashboard = () => {
       <h3 className="page-title mb-4">Dashboard</h3>
 
       {/* Comparison */}
-      <div className="d-flex flex-wrap justify-content-between align-items-center gap-3">
+      <h3 className="sub-heading mb-2">Incom Statics</h3>
+      <div className="comparison-card d-flex flex-wrap justify-content-between align-items-center gap-3">
         {/* 1 */}
-        <div className="d-flex justify-content-between align-items-center flex-grow-1 bg-white rounded-3 p-4">
-          <div className="d-flex flex-column gap-1">
+        <div className="d-flex justify-content-between align-items-center flex-grow-1 bg-white rounded-3 p-3 p-lg-4">
+          <div className="total-earning d-flex flex-column gap-1">
             <p>Total</p>
             <h4>$100.00</h4>
           </div>
-          <div className="d-flex flex-column align-items-end gap-1">
+
+          <div className="compar-data d-flex flex-column align-items-end gap-2">
             <h6 className="green">
               <FaArrowTrendUp /> 36%
             </h6>
@@ -133,12 +134,13 @@ const Dashboard = () => {
         </div>
 
         {/* 2 */}
-        <div className="d-flex justify-content-between align-items-center flex-grow-1 bg-white rounded-3 p-4">
-          <div className="d-flex flex-column gap-1">
+        <div className="d-flex justify-content-between align-items-center flex-grow-1 bg-white rounded-3 p-3 p-lg-4">
+          <div className="total-earning d-flex flex-column gap-1">
             <p>Total</p>
             <h4>$100.00</h4>
           </div>
-          <div className="d-flex flex-column align-items-end gap-1">
+
+          <div className="compar-data d-flex flex-column align-items-end gap-2">
             <h6 className="red">
               <FaArrowTrendDown /> 36%
             </h6>
@@ -147,12 +149,13 @@ const Dashboard = () => {
         </div>
 
         {/* 3 */}
-        <div className="d-flex justify-content-between align-items-center flex-grow-1 bg-white rounded-3 p-4">
-          <div className="d-flex flex-column gap-1">
+        <div className="d-flex justify-content-between align-items-center flex-grow-1 bg-white rounded-3 p-3 p-lg-4">
+          <div className="total-earning d-flex flex-column gap-1">
             <p>Total</p>
             <h4>$100.00</h4>
           </div>
-          <div className="d-flex flex-column align-items-end gap-1">
+
+          <div className="compar-data d-flex flex-column align-items-end gap-2">
             <h6 className="green">
               <FaArrowTrendUp /> 36%
             </h6>
@@ -163,16 +166,16 @@ const Dashboard = () => {
 
       {/* Incom Statics */}
       <div className="mt-4">
-        <h3 className="mb-4">Incom Statics</h3>
-        <div>
+        <h3 className="sub-heading mb-3">Monthly Sales</h3>
+        <div className="monthly-sales-cart">
           <Column {...config} />
         </div>
       </div>
 
       {/* Recent Orders */}
       <div className="mt-4">
-        <h3>Recent Orders</h3>
-        <div>
+        <h3 className="sub-heading mb-3">Recent Orders</h3>
+        <div className="table-container">
           <Table columns={columns} dataSource={recentOrdersData} />
         </div>
       </div>

@@ -30,8 +30,8 @@ for (let i = 0; i < 46; i++) {
 const Enquiries = () => {
   return (
     <div>
-      <h3 className="mb-4 title">Enquiries</h3>
-      <div>
+      <h3 className="page-title mb-4">Enquiries</h3>
+      <div className="table-container">
         <Table columns={columns} dataSource={data1} />
       </div>
     </div>

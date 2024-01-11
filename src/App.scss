@@ -1,86 +1,152 @@
-// * {
-//   margin: 0;
-//   padding: 0;
-//   box-sizing: border-box;
-// }
+@import "./css-config/mixins.scss";
 
-// :root {
-//   --primary-color: #ffaa3b;
-//   --secondary-color: #777777;
-//   --color-131921: #131921;
-//   --color-3b4149: #3b4149;
-//   --color-base-button: #232f3e;
-//   --color-232f3e: #232f3e;
-//   --color-bf4800: #bf4800;
-//   --color-f5f5f7: #f5f5f7;
-// }
+.ant-layout {
+  // Side Menu
+  .ant-layout-sider {
+    max-width: 180px !important;
+    min-width: 180px !important;
+    @include md {
+      max-width: 220px !important;
+      min-width: 220px !important;
+    }
+    @include lg {
+      max-width: 230px !important;
+      min-width: 230px !important;
+    }
+  }
 
-// body {
-//   font-family: "Poppins", sans-serif;
-//   background-color: var(--color-f5f5f7);
-// }
+  .logo {
+    .sm-logo {
+      display: none;
+    }
+  }
+  .ant-layout-sider-collapsed {
+    max-width: 60px !important;
+    min-width: 60px !important;
+    @include md {
+      max-width: 70px !important;
+      min-width: 70px !important;
+    }
+    @include lg {
+      max-width: 80px !important;
+      min-width: 80px !important;
+    }
+    .sm-logo {
+      display: block;
+    }
+    .lg-logo {
+      display: none;
+    }
+  }
 
-// a {
-//   text-decoration: none;
-//   display: inline-block;
-// }
+  // Header
+  .ant-layout-header {
+    .anticon svg {
+      font-size: 24px;
+    }
+    .notification-icon {
+      top: 1px;
+      right: -2px;
+      font-size: 16px;
+    }
+    .user-info {
+      img {
+        width: 45px;
+        height: 40px;
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center;
+      }
+      .user-details {
+        .user-name {
+          line-height: 18px;
+          font-weight: 500;
+          display: none;
+          @include md {
+            font-size: 18px;
+            display: block;
+          }
+          @include lg {
+            font-size: 16px;
+          }
+        }
+        .user-email {
+          line-height: 20px;
+          font-size: 14px;
+          @include lg {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
 
-// .form-control:focus {
-//   box-shadow: none;
-// }
+  // Main Layout Content
+  .ant-layout-content {
+    overflow-y: scroll;
+    background-color: transparent !important;
+    height: 78vh !important;
+    margin: 0px 0px;
+    padding: 10px;
 
-// .gap-10 {
-//   gap: 0.625rem;
-// }
-// .gap-15 {
-//   gap: 0.9375rem;
-// }
-// .gap-20 {
-//   gap: 20px;
-// }
-// .gap-30 {
-//   gap: 1.875rem;
-// }
+    @include md {
+      margin: 0px 16px;
+      padding: 15px 20px;
+    }
 
-// .button {
-//   background: var(--color-232f3e);
-//   color: #fff;
-//   font-size: 0.875rem;
-//   padding: 0.8125rem 2.0625rem;
-//   border-radius: 1.5625rem;
-//   transition: background 0.2s ease, color 0.2s ease;
-//   font-weight: 500;
-//   &:hover {
-//     background: var(--primary-color);
-//     color: var(--color-131921);
-//   }
-// }
+    &::-webkit-scrollbar {
+      width: 0 !important;
+    }
 
-// .secondary-button {
-//   background: var(--primary-color);
-//   color: #000;
-//   &:hover {
-//     color: #fff;
-//     background: #232f3f;
-//   }
-// }
+    //* DashBoard Start
+    .page-title {
+      margin-top: 2px;
+      font-size: 26px;
+      color: #212529;
+    }
+    .sub-heading {
+      font-size: 18px;
+      color: var(--color-3b4149);
+    }
+    .comparison-card {
+      .compar-data {
+        font-size: 10px;
+        font-weight: 500;
+        @include lg {
+          font-size: 14px;
+          font-weight: 400;
+        }
+        .green {
+          color: green;
+        }
 
-// p,
-// h1,
-// h2,
-// h3,
-// h4,
-// h5,
-// h6 {
-//   margin-bottom: 0;
-// }
-
-// .card {
-//   background: #fff;
-//   box-shadow: 0 0 10px #0000001a;
-//   border-radius: 10px;
-// }
-
-// li {
-//   list-style-type: none;
-// }
+        .red {
+          color: red;
+        }
+      }
+    }
+    //   Incom Statics
+    .monthly-sales-cart {
+      canvas {
+        margin-left: -10px;
+        width: 100% !important;
+        height: 300px !important;
+        touch-action: pinch-zoom !important;
+        @include lg {
+          margin-left: 10px;
+          height: 450px !important;
+        }
+      }
+    }
+    //   Recent Orders
+    .table-container {
+      overflow-x: auto;
+      margin-top: 10px;
+      .ant-table {
+        width: 100%;
+        min-width: 800px;
+      }
+    }
+    //* DashBoard End
+  }
+}

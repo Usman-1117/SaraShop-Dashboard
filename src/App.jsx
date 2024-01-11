@@ -1,3 +1,4 @@
+import "./App.scss";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 // Auth
 import Login from "./pages/Auth/Login";
@@ -6,7 +7,7 @@ import Resetpassword from "./pages/Auth/Resetpassword";
 // Components
 import MainLayout from "./components/MainLayout/MainLayout";
 // Pages
-import Dashboard from "./pages/Dashboard/Dashboard";
+import Dashboard from "./pages/Dashboard";
 import Enquiries from "./pages/Enquiries";
 import Bloglist from "./pages/Bloglist";
 import BlogCatlist from "./pages/BlogCatlist";

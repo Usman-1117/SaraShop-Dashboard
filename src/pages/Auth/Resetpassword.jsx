@@ -9,8 +9,10 @@ const ResetPassword = () => {
         <Row>
           <Col>
             <div className="auth-card bg-white my-3 mx-auto">
-              <h3 className="py-2">Reset Password</h3>
-              <p className="pb-4">Please enter your new password.</p>
+              <h3 className="page-title py-2">Reset Password</h3>
+              <p className="sub-heading pb-4">
+                Please enter your new password.
+              </p>
               <Form>
                 {/* Password */}
                 <CustomInput
