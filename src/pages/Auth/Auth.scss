@@ -14,7 +14,8 @@
     text-align: center;
     padding: 20px;
     box-shadow: 0 0 10px #0000001a;
-    border-radius: 10px;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
     @include md {
       padding: 30px;
       max-width: 38rem;
@@ -58,6 +59,11 @@
         @include md {
           font-size: 16px;
         }
+      }
+      .error {
+        color: red;
+        font-size: 14px;
+        text-align: start;
       }
     }
   }

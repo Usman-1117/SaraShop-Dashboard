@@ -1,12 +1,8 @@
-import "./AddBlog.scss";
 import { useState } from "react";
+import CustomInput from "../components/CustomInput";
 
 import { Form, Button } from "react-bootstrap";
-
-import CustomInput from "../../components/CustomInput";
-
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 
 import { InboxOutlined } from "@ant-design/icons";
 import { message, Upload } from "antd";
@@ -54,7 +50,11 @@ const AddBlog = () => {
           />
 
           {/* Select Category */}
-          <Form.Select className="py-3 mb-3">
+          <Form.Select
+            id="selectBlogCategory"
+            name="blogCategory"
+            className="py-3 mb-3"
+          >
             <option value="">Select Blog Category</option>
             <option value="1">One</option>
             <option value="2">Two</option>

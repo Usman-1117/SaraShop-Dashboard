@@ -1,12 +1,49 @@
 import "./Auth.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 import { Col, Container, Form, Row } from "react-bootstrap";
+
 import CustomInput from "../../components/CustomInput";
 
-// import AuthImg from "../../assets/Auth_img.svg";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../features/auth/authSlice";
+import { useEffect } from "react";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+
+    validationSchema: Yup.object({
+      email: Yup.string().email("Invalid email address").required("Required"),
+      password: Yup.string().required("Required"),
+    }),
+
+    onSubmit: (values) => {
+      dispatch(login(values));
+    },
+  });
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    // console.log(user);
+    if (user || isSuccess) {
+      navigate("/dashboard");
+    } else {
+      navigate("");
+    }
+  }, [user, isLoading, isError, isSuccess, message]);
   return (
     <div className="auth-wrapper">
       <Container>
@@ -17,22 +54,43 @@ const Login = () => {
               <p className="sub-heading pb-4">
                 Sign in to access your account and continue.
               </p>
+              <div className="error text-center">
+                {message.message == "Rejected" ? "You are not an Admin" : ""}
+              </div>
 
-              <Form>
+              <Form onSubmit={formik.handleSubmit}>
                 {/* Email */}
                 <CustomInput
                   id="floatingEmail"
                   label="Email"
                   type="email"
-                  className=""
+                  name="email"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.email}
+                  autoComplete="email"
                 />
+                <div className="error">
+                  {formik.touched.email && formik.errors.email ? (
+                    <p>{formik.errors.email}</p>
+                  ) : null}
+                </div>
 
                 {/* Password */}
                 <CustomInput
                   id="floatingPassword"
                   label="Password"
                   type="password"
+                  name="password"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
                 />
+                <div className="error">
+                  {formik.touched.password && formik.errors.password ? (
+                    <p>{formik.errors.password}</p>
+                  ) : null}
+                </div>
 
                 {/* Forgot Password */}
                 <div className="text-start my-3">
@@ -48,17 +106,6 @@ const Login = () => {
               </Form>
             </div>
           </Col>
-
-          {/* <Col lg={6}>
-            <div className="d-none d-md-none d-lg-block overflow-hidden">
-              <img
-                src={AuthImg}
-                alt="Auth Image"
-                // className="img-fluid"
-                style={{ width: "500px" }}
-              />
-            </div>
-          </Col> */}
         </Row>
       </Container>
     </div>

@@ -17,7 +17,7 @@ import ColorList from "./pages/ColorList";
 import CategoryList from "./pages/CategoryList";
 import BrandList from "./pages/BrandList";
 import ProductList from "./pages/ProductList";
-import AddBlog from "./pages/AddBlog/AddBlog";
+import AddBlog from "./pages/AddBlog";
 import AddBlogCat from "./pages/AddBlogCat";
 import AddColor from "./pages/AddColor";
 import AddCategory from "./pages/AddCategory";
@@ -30,12 +30,12 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           {/* Auth */}
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/forgot-password" element={<Forgotpassword />} />
           <Route path="/reset-password" element={<Resetpassword />} />
           {/* Pages */}
 
-          <Route path="/" element={<MainLayout />}>
+          <Route path="/dashboard" element={<MainLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="customers" element={<Customers />} />
             <Route path="product" element={<AddProduct />} />

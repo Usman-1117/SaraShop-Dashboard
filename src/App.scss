@@ -10,8 +10,8 @@
       min-width: 220px !important;
     }
     @include lg {
-      max-width: 230px !important;
-      min-width: 230px !important;
+      max-width: 225px !important;
+      min-width: 225px !important;
     }
   }
 
@@ -37,6 +37,9 @@
     .lg-logo {
       display: none;
     }
+  }
+  .ant-menu-item {
+    background: transparent !important;
   }
 
   // Header
@@ -148,5 +151,8 @@
       }
     }
     //* DashBoard End
+  }
+  .ql-editor {
+    min-height: 20vh;
   }
 }
