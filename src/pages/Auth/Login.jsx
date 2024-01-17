@@ -1,8 +1,10 @@
 import "./Auth.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
 import { Col, Container, Form, Row } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 
 import CustomInput from "../../components/CustomInput";
 
@@ -11,11 +13,11 @@ import * as Yup from "yup";
 
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../features/auth/authSlice";
-import { useEffect } from "react";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -32,18 +34,18 @@ const Login = () => {
     },
   });
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
+  const { user, isLoading, isSuccess, message } = useSelector(
+    ({ auth }) => auth
   );
 
   useEffect(() => {
-    // console.log(user);
     if (user || isSuccess) {
       navigate("/dashboard");
     } else {
-      navigate("");
+      navigate("/");
     }
-  }, [user, isLoading, isError, isSuccess, message]);
+  }, [user, isLoading, isSuccess, message]);
+
   return (
     <div className="auth-wrapper">
       <Container>
@@ -54,9 +56,10 @@ const Login = () => {
               <p className="sub-heading pb-4">
                 Sign in to access your account and continue.
               </p>
-              <div className="error text-center">
-                {message.message == "Rejected" ? "You are not an Admin" : ""}
-              </div>
+
+              {message.message === "Rejected" && (
+                <div className="error text-center">You are not an Admin</div>
+              )}
 
               <Form onSubmit={formik.handleSubmit}>
                 {/* Email */}
