@@ -1,4 +1,12 @@
-import { Table } from "antd";
+import { Empty, Table } from "antd";
+import { Link } from "react-router-dom";
+// Icons
+import { FaRegEdit } from "react-icons/fa";
+import { FaTrashCan } from "react-icons/fa6";
+
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getBrands } from "../features/brand/brandSlice";
 
 const columns = [
   {
@@ -10,30 +18,45 @@ const columns = [
     dataIndex: "name",
   },
   {
-    title: "Product",
-    dataIndex: "product",
-  },
-  {
-    title: "Status",
-    dataIndex: "address",
+    title: "Action",
+    dataIndex: "action",
   },
 ];
-const data1 = [];
-for (let i = 0; i < 46; i++) {
-  data1.push({
-    key: i,
-    name: `Edward King ${i}`,
-    product: 32,
-    address: `London, Park Lane no. ${i}`,
-  });
-}
+
 const BrandList = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getBrands());
+  }, [dispatch]);
+
+  const brandState = useSelector((state) => state.brand.brands);
+
+  const data = brandState.map((brand, index) => ({
+    key: index + 1,
+    name: brand.title,
+    action: (
+      <>
+        <Link to="/" className="fs-5 text-primary">
+          <FaRegEdit />
+        </Link>
+
+        <Link to="/" className="ms-4 fs-5 " style={{ color: "#CC0000" }}>
+          <FaTrashCan />
+        </Link>
+      </>
+    ),
+  }));
   return (
     <div>
       <h3 className="page-title mb-4">Brand List</h3>
-      <div className="table-container">
-        <Table columns={columns} dataSource={data1} />
-      </div>
+      {brandState.length > 0 ? (
+        <div className="table-container">
+          <Table columns={columns} dataSource={data} />
+        </div>
+      ) : (
+        <Empty description="No data available" />
+      )}
     </div>
   );
 };

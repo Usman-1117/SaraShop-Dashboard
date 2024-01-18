@@ -1,10 +1,13 @@
 import { Empty, Table } from "antd";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../features/product/productSlice";
+
 import { Link } from "react-router-dom";
+// Icons
 import { FaRegEdit } from "react-icons/fa";
 import { FaTrashCan } from "react-icons/fa6";
+
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getProducts } from "../features/product/productSlice";
 
 const columns = [
   {
