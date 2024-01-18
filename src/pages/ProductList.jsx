@@ -1,4 +1,10 @@
-import { Table } from "antd";
+import { Empty, Table } from "antd";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../features/product/productSlice";
+import { Link } from "react-router-dom";
+import { FaRegEdit } from "react-icons/fa";
+import { FaTrashCan } from "react-icons/fa6";
 
 const columns = [
   {
@@ -6,34 +12,75 @@ const columns = [
     dataIndex: "key",
   },
   {
-    title: "Name",
-    dataIndex: "name",
+    title: "Title",
+    dataIndex: "title",
+    sorter: (a, b) => a.title.localeCompare(b.title),
   },
   {
-    title: "Product",
-    dataIndex: "product",
+    title: "Brand",
+    dataIndex: "brand",
+    sorter: (a, b) => a.brand.localeCompare(b.brand),
   },
   {
-    title: "Status",
-    dataIndex: "address",
+    title: "Category",
+    dataIndex: "category",
+    sorter: (a, b) => a.category.localeCompare(b.category),
+  },
+  {
+    title: "Color",
+    dataIndex: "color",
+    sorter: (a, b) => a.color.localeCompare(b.color),
+  },
+  {
+    title: "Price",
+    dataIndex: "price",
+    sorter: (a, b) => a.price.localeCompare(b.price),
+  },
+  {
+    title: "Action",
+    dataIndex: "action",
   },
 ];
-const data1 = [];
-for (let i = 0; i < 46; i++) {
-  data1.push({
-    key: i,
-    name: `Edward King ${i}`,
-    product: 32,
-    address: `London, Park Lane no. ${i}`,
-  });
-}
+
 const ProductList = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
+
+  const productState = useSelector((state) => state.product.products);
+
+  const data = productState.map((product, index) => ({
+    key: index + 1,
+    title: product.title,
+    brand: product.brand,
+    category: product.category,
+    color: product.color,
+    price: `$ ${product.price}`,
+    action: (
+      <>
+        <Link to="/" className="fs-5 text-primary">
+          <FaRegEdit />
+        </Link>
+
+        <Link to="/" className="ms-4 fs-5 " style={{ color: "#CC0000" }}>
+          <FaTrashCan />
+        </Link>
+      </>
+    ),
+  }));
+
   return (
     <div>
       <h3 className="page-title mb-4">Product List</h3>
-      <div className="table-container">
-        <Table columns={columns} dataSource={data1} />
-      </div>
+      {productState.length > 0 ? (
+        <div className="table-container">
+          <Table columns={columns} dataSource={data} />
+        </div>
+      ) : (
+        <Empty description="No data available" />
+      )}
     </div>
   );
 };

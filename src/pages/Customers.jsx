@@ -31,6 +31,7 @@ const Customers = () => {
   }, [dispatch]);
 
   const customerState = useSelector((state) => state.customer.customers);
+
   const data = customerState.map((customer, index) => ({
     key: index + 1,
     name: `${customer.firstname} ${customer.lastname}`,

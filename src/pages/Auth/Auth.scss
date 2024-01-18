@@ -36,19 +36,18 @@
 
     form {
       input {
-        font-size: 18px;
         width: 100%;
         box-shadow: none;
         height: 60px;
         border: 0;
-        font-size: 15px;
-        color: var(--secondary-color);
+        font-size: 13px;
+        color: #000;
         background-color: #f7f7f7;
         @include md {
           font-size: 20px;
         }
         @include lg {
-          font-size: 17px;
+          font-size: 16px;
         }
       }
 
