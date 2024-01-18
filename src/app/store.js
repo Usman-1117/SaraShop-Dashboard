@@ -3,6 +3,7 @@ import authReducer from "../features/auth/authSlice";
 import customerReducer from "../features/customers/customerSlice";
 import productReducer from "../features/product/productSlice";
 import brandReducer from "../features/brand/brandSlice";
+import prodCategoryReducer from "../features/prodCategory/prodCategorySlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     customer: customerReducer,
     product: productReducer,
     brand: brandReducer,
+    prodCategory: prodCategoryReducer,
   },
 });

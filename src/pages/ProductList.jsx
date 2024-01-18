@@ -32,7 +32,6 @@ const columns = [
   {
     title: "Color",
     dataIndex: "color",
-    sorter: (a, b) => a.color.localeCompare(b.color),
   },
   {
     title: "Price",

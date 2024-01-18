@@ -16,6 +16,7 @@ const columns = [
   {
     title: "Name",
     dataIndex: "name",
+    sorter: (a, b) => a.name.localeCompare(b.name),
   },
   {
     title: "Action",
