@@ -7,6 +7,7 @@ import { FaTrashCan } from "react-icons/fa6";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+
 import { getProducts } from "../features/product/productSlice";
 
 const columns = [
