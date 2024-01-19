@@ -23,6 +23,7 @@
   .ant-layout-sider-collapsed {
     max-width: 60px !important;
     min-width: 60px !important;
+
     @include md {
       max-width: 70px !important;
       min-width: 70px !important;
@@ -38,8 +39,13 @@
       display: none;
     }
   }
-  .ant-menu-item {
+  .ant-menu-item,
+  .ant-menu-submenu-title {
     background: transparent !important;
+    padding-left: 13px !important;
+    @include lg {
+      padding-left: 22px !important;
+    }
   }
 
   // Header
