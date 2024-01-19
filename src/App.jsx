@@ -8,21 +8,25 @@ import Resetpassword from "./pages/Auth/Resetpassword";
 import MainLayout from "./components/MainLayout/MainLayout";
 // Pages
 import Dashboard from "./pages/Dashboard";
-import Enquiries from "./pages/Enquiries";
-import Bloglist from "./pages/Bloglist";
-import BlogCatlist from "./pages/BlogCatlist";
-import Orders from "./pages/Orders";
 import Customers from "./pages/Customers";
-import ColorList from "./pages/ColorList";
-import CategoryList from "./pages/CategoryList";
-import BrandList from "./pages/BrandList";
-import ProductList from "./pages/ProductList";
-import AddBlog from "./pages/AddBlog";
-import AddBlogCat from "./pages/AddBlogCat";
-import AddColor from "./pages/AddColor";
-import AddCategory from "./pages/AddCategory";
-import AddBrand from "./pages/AddBrand";
+
 import AddProduct from "./pages/AddProduct";
+import ProductList from "./pages/ProductList";
+import AddBrand from "./pages/AddBrand";
+import BrandList from "./pages/BrandList";
+import AddCategory from "./pages/AddCategory";
+import CategoryList from "./pages/CategoryList";
+import AddColor from "./pages/AddColor";
+import ColorList from "./pages/ColorList";
+
+import Orders from "./pages/Orders";
+
+import AddBlog from "./pages/AddBlog";
+import Bloglist from "./pages/Bloglist";
+import AddBlogCat from "./pages/AddBlogCat";
+import BlogCatlist from "./pages/BlogCatlist";
+
+import Enquiries from "./pages/Enquiries";
 
 const App = () => {
   return (
