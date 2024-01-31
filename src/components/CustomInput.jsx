@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { FloatingLabel, Form } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const CustomInput = ({
   type,
@@ -11,20 +10,28 @@ const CustomInput = ({
   value,
   onChange,
   onBlur,
-  autoComplete,
+  autoComplete = "off",
+  touched,
+  errors,
 }) => {
   return (
-    <FloatingLabel controlId={id} label={label} className={`mt-3 ${className}`}>
-      <Form.Control
-        type={type}
-        placeholder={label}
-        name={name}
-        value={value}
-        onChange={onChange}
-        onBlur={onBlur}
-        autoComplete={autoComplete}
-      />
-    </FloatingLabel>
+    <div className={`mb-3 ${className}`}>
+      <FloatingLabel controlId={id} label={label}>
+        <Form.Control
+          type={type}
+          placeholder={label}
+          name={name}
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
+          autoComplete={autoComplete}
+          isInvalid={touched && !!errors}
+        />
+        <Form.Control.Feedback type="invalid" style={{ fontSize: "14px" }}>
+          {errors}
+        </Form.Control.Feedback>
+      </FloatingLabel>
+    </div>
   );
 };
 
@@ -34,10 +41,12 @@ CustomInput.propTypes = {
   className: PropTypes.string,
   id: PropTypes.string,
   label: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onBlur: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   autoComplete: PropTypes.string,
+  touched: PropTypes.bool,
+  errors: PropTypes.string,
 };
 
 export default CustomInput;

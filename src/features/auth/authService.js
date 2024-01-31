@@ -1,16 +1,6 @@
 import axios from "axios";
 import { base_url } from "../../utils/base_url";
-
-// const getTokenFromLocalStorage = localStorage.getItem("user") ?
-//    JSON.parse(localStorage.getItem("user"))
-//   : null;
-
-// const config = {
-//   headers: {
-//     Authorization: `Bearer ${getTokenFromLocalStorage.token}`,
-//     Accept: "application/json",
-//   },
-// };
+import { config } from "../../utils/axiosconfig";
 
 //? Login
 const login = async (user) => {
@@ -23,8 +13,7 @@ const login = async (user) => {
 
 //? Get Orders
 const getOrders = async () => {
-  // console.log(config);
-  const response = await axios.get(`${base_url}user/all-orders/`);
+  const response = await axios.get(`${base_url}user/all-orders/`, config);
   return response.data;
 };
 

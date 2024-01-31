@@ -1,14 +1,18 @@
-// import "./MainLayout.scss";
 import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import userProfile from "../../assets/user.jpg";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // React Icons
-import { AiOutlineDashboard, AiOutlineUser } from "react-icons/ai";
+import { AiOutlineUser } from "react-icons/ai";
 import { TbBrandStripe, TbZoomInArea } from "react-icons/tb";
 import { BiCategory, BiSolidColorFill } from "react-icons/bi";
 import { FaBloggerB } from "react-icons/fa6";
 import { IoBagAddOutline, IoLogoStencil } from "react-icons/io5";
+import { LuLayoutDashboard } from "react-icons/lu";
+
 import {
   MdOutlineProductionQuantityLimits,
   MdFormatListBulletedAdd,
@@ -56,7 +60,7 @@ const MainLayout = () => {
           items={[
             {
               key: "",
-              icon: <AiOutlineDashboard className="fs-4" />,
+              icon: <LuLayoutDashboard className="fs-4" />,
               label: "Dashboard",
             },
             {
@@ -205,6 +209,18 @@ const MainLayout = () => {
             borderRadius: borderRadiusLG,
           }}
         >
+          <ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={true}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
           <Outlet />
         </Content>
       </Layout>

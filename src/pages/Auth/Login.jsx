@@ -1,16 +1,13 @@
 import "./Auth.scss";
-import "bootstrap/dist/css/bootstrap.min.css";
-
-import { useEffect } from "react";
+import CustomInput from "../../components/CustomInput";
 
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
-import CustomInput from "../../components/CustomInput";
-
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../features/auth/authSlice";
 
