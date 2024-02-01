@@ -32,6 +32,10 @@ const columns = [
     sorter: (a, b) => a.category.localeCompare(b.category),
   },
   {
+    title: "Tags",
+    dataIndex: "tags",
+  },
+  {
     title: "Color",
     dataIndex: "color",
   },
@@ -60,24 +64,25 @@ const ProductList = () => {
     title: product.title,
     brand: product.brand,
     category: product.category,
+    tags: product.tags,
     color: product.color,
     price: `$ ${product.price}`,
     action: (
       <>
         <Link
           to="/"
-          className="fs-5 text-primary border border-2 rounded-2"
-          style={{ padding: "0px 5px" }}
+          className="text-primary border border-2 rounded-2"
+          style={{ padding: "4px 6px" }}
         >
-          <AiOutlineEdit />
+          <AiOutlineEdit fontSize={20} />
         </Link>
 
         <Link
           to="/"
-          className="ms-4 fs-5 border border-danger rounded-2"
-          style={{ color: "#CC0000", padding: "0px 5px" }}
+          className="ms-3 border border-danger rounded-2"
+          style={{ color: "#CC0000", padding: "4px 6px" }}
         >
-          <PiTrashSimple />
+          <PiTrashSimple fontSize={18} />
         </Link>
       </>
     ),
@@ -85,7 +90,12 @@ const ProductList = () => {
 
   return (
     <div>
-      <h3 className="page-title mb-4">Product List</h3>
+      <div className="d-flex justify-content-between align-items-center my-2 mb-4">
+        <h3 className="page-title">Product List</h3>
+        <Link to="/dashboard/product" className="button rounded-2 p-2">
+          Add Product
+        </Link>
+      </div>
       {productState.length > 0 ? (
         <div className="table-container">
           <Table columns={columns} dataSource={data} />

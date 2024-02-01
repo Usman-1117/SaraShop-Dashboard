@@ -36,14 +36,14 @@ const CustomInput = ({
 };
 
 CustomInput.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   type: PropTypes.string,
   className: PropTypes.string,
   id: PropTypes.string,
   label: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onBlur: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
   autoComplete: PropTypes.string,
   touched: PropTypes.bool,
   errors: PropTypes.string,

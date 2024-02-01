@@ -9,13 +9,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineUser } from "react-icons/ai";
 import { TbBrandStripe, TbZoomInArea } from "react-icons/tb";
 import { BiCategory, BiSolidColorFill } from "react-icons/bi";
-import { FaBloggerB } from "react-icons/fa6";
+import { FaBloggerB, FaListCheck } from "react-icons/fa6";
 import { IoBagAddOutline, IoLogoStencil } from "react-icons/io5";
 import { LuLayoutDashboard } from "react-icons/lu";
 
 import {
   MdOutlineProductionQuantityLimits,
-  MdFormatListBulletedAdd,
+  // MdFormatListBulletedAdd,
   MdAddToQueue,
   MdNotificationsActive,
 } from "react-icons/md";
@@ -117,7 +117,7 @@ const MainLayout = () => {
             },
             {
               key: "orders",
-              icon: <MdFormatListBulletedAdd className="fs-4" />,
+              icon: <FaListCheck className="fs-4" />,
               label: "Orders",
             },
             {
@@ -211,7 +211,7 @@ const MainLayout = () => {
         >
           <ToastContainer
             position="top-right"
-            autoClose={2000}
+            autoClose={1200}
             hideProgressBar={false}
             newestOnTop={true}
             closeOnClick
