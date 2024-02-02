@@ -13,7 +13,7 @@ export const getProducts = createAsyncThunk(
   }
 );
 
-// Create Products
+// Create Product
 export const createProducts = createAsyncThunk(
   "product/create-products",
   async (productData, thunkAPI) => {
