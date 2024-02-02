@@ -59,7 +59,12 @@ const Bloglist = () => {
 
   return (
     <div>
-      <h3 className="page-title mb-4">Blogs List</h3>
+      <div className="d-flex justify-content-between mb-3">
+        <h3 className="page-title">Blogs List</h3>
+        <Link to="/dashboard/blog" className="button">
+          Add Blog
+        </Link>
+      </div>
       {blogState.length > 0 ? (
         <div className="table-container">
           <Table columns={columns} dataSource={data} />

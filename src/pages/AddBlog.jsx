@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCategories } from "../features/blogCategory/blogCategorySlice";
 import { toast } from "react-toastify";
-import { createBlogs } from "../features/blogs/blogSlice";
+import { createBlogs, resetState } from "../features/blogs/blogSlice";
 import { useNavigate } from "react-router-dom";
 
 const AddBlog = () => {
@@ -63,6 +63,7 @@ const AddBlog = () => {
       resetForm();
       setTimeout(() => {
         navigate("/dashboard/blog-list");
+        dispatch(resetState());
       }, 2000);
     },
   });

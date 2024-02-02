@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { Select } from "antd";
 // Icons
 // import { MdFileUpload } from "react-icons/md";
@@ -116,9 +116,9 @@ const AddProduct = () => {
       // alert(JSON.stringify(values));
       dispatch(createProducts(values));
       resetForm();
-      dispatch(resetState());
       setTimeout(() => {
         navigate("/dashboard/product-list");
+        dispatch(resetState());
       }, 2000);
     },
   });
@@ -324,9 +324,9 @@ const AddProduct = () => {
 
           {/* Button */}
           <div className="py-4">
-            <Button type="submit" className="button border-0">
+            <button type="submit" className="button border-0">
               {isLoading ? "Adding Product..." : "Add Product"}
-            </Button>
+            </button>
           </div>
         </Form>
       </div>
