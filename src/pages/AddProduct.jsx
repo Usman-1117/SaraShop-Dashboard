@@ -21,7 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getBrands } from "../features/brand/brandSlice";
 import { getCategories } from "../features/prodCategory/prodCategorySlice";
-import { createProducts } from "../features/product/productSlice";
+import { createProducts, resetState } from "../features/product/productSlice";
 // import { getColors } from "../features/color/colorSlice";
 // import { uploadImg } from "../features/upload/uploadSlice";
 
@@ -116,6 +116,7 @@ const AddProduct = () => {
       // alert(JSON.stringify(values));
       dispatch(createProducts(values));
       resetForm();
+      dispatch(resetState());
       setTimeout(() => {
         navigate("/dashboard/product-list");
       }, 2000);
@@ -134,7 +135,7 @@ const AddProduct = () => {
             type="text"
             name="title"
             id="floatingTitle"
-            label="Enter Blog Title"
+            label="Enter Product Title"
             className="mt-2"
             value={values.title}
             onChange={handleChange("title")}
@@ -162,6 +163,7 @@ const AddProduct = () => {
             <div className="d-flex flex-column flex-grow-1 mb-2">
               <CustomSelect
                 id="selectBrand"
+                status="error"
                 name="brand"
                 value={values.brand}
                 onChange={handleChange("brand")}
@@ -180,6 +182,7 @@ const AddProduct = () => {
                   </Select.Option>
                 ))}
               </CustomSelect>
+
               <ValidationError touched={touched.brand} errors={errors.brand} />
             </div>
 

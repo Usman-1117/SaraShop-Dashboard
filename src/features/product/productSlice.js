@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import productService from "./productService";
 
 // Get Products
@@ -25,6 +25,8 @@ export const createProducts = createAsyncThunk(
   }
 );
 
+export const resetState = createAction("Reset_all");
+
 const initialState = {
   products: [],
   createdProduct: "",
@@ -39,41 +41,46 @@ export const productSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getProducts.pending, (state) => {
-      state.isLoading = true;
-    });
+    builder
+      // Get Products
+      .addCase(getProducts.pending, (state) => {
+        state.isLoading = true;
+      })
 
-    builder.addCase(getProducts.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.isError = false;
-      state.isSuccess = true;
-      state.products = action.payload;
-    });
+      .addCase(getProducts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.products = action.payload;
+      })
 
-    builder.addCase(getProducts.rejected, (state, action) => {
-      state.isLoading = false;
-      state.isError = true;
-      state.isSuccess = false;
-      state.message = action.error;
-    });
+      .addCase(getProducts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      });
 
-    builder.addCase(createProducts.pending, (state) => {
-      state.isLoading = true;
-    });
+    // Create Products
+    builder
+      .addCase(createProducts.pending, (state) => {
+        state.isLoading = true;
+      })
 
-    builder.addCase(createProducts.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.isError = false;
-      state.isSuccess = true;
-      state.createdProduct = action.payload;
-    });
+      .addCase(createProducts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.createdProduct = action.payload;
+      })
 
-    builder.addCase(createProducts.rejected, (state, action) => {
-      state.isLoading = false;
-      state.isError = true;
-      state.isSuccess = false;
-      state.message = action.error;
-    });
+      .addCase(createProducts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(resetState, () => initialState);
   },
 });
 

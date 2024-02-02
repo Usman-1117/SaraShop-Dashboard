@@ -16,10 +16,17 @@ const columns = [
   {
     title: "Email",
     dataIndex: "email",
+    sorter: (a, b) => a.name.localeCompare(b.name),
   },
   {
     title: "Mobile",
     dataIndex: "mobile",
+    sorter: (a, b) => a.name.localeCompare(b.name),
+  },
+  {
+    title: "Role",
+    dataIndex: "role",
+    sorter: (a, b) => a.name.localeCompare(b.name),
   },
 ];
 
@@ -37,6 +44,7 @@ const Customers = () => {
     name: `${customer.firstname} ${customer.lastname}`,
     email: customer.email,
     mobile: customer.mobile,
+    role: customer.role,
   }));
 
   return (
