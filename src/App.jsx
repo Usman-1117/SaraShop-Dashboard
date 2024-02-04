@@ -27,6 +27,8 @@ import AddBlogCat from "./pages/AddBlogCat";
 import BlogCatlist from "./pages/BlogCatlist";
 
 import Enquiries from "./pages/Enquiries";
+import AddCoupon from "./pages/AddCoupon";
+import Couponlist from "./pages/Couponlist";
 
 const App = () => {
   return (
@@ -51,6 +53,8 @@ const App = () => {
             <Route path="color" element={<AddColor />} />
             <Route path="color-list" element={<ColorList />} />
             <Route path="orders" element={<Orders />} />
+            <Route path="coupon" element={<AddCoupon />} />
+            <Route path="coupon-list" element={<Couponlist />} />
             <Route path="blog" element={<AddBlog />} />
             <Route path="blog-list" element={<Bloglist />} />
             <Route path="blog-category" element={<AddBlogCat />} />

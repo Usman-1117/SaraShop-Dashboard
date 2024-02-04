@@ -1,4 +1,4 @@
-import { Button, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import CustomInput from "../components/CustomInput";
 
 import { useNavigate } from "react-router-dom";
@@ -73,9 +73,9 @@ const AddBrand = () => {
             errors={errors.brand}
           />
           <div className="py-4">
-            <Button type="submit" className="button border-0">
+            <button type="submit" className="button border-0">
               Add Brand
-            </Button>
+            </button>
           </div>
         </Form>
       </div>

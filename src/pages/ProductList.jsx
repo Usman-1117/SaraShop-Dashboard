@@ -66,7 +66,7 @@ const ProductList = () => {
     category: product.category,
     tags: product.tags,
     color: product.color,
-    price: `$ ${product.price}`,
+    price: `Rs. ${product.price}`,
     action: (
       <>
         <Link

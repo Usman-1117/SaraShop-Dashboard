@@ -6,18 +6,17 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // React Icons
-import { AiOutlineUser } from "react-icons/ai";
 import { TbBrandStripe, TbZoomInArea } from "react-icons/tb";
 import { BiCategory, BiSolidColorFill } from "react-icons/bi";
 import { FaBloggerB, FaListCheck } from "react-icons/fa6";
 import { IoBagAddOutline, IoLogoStencil } from "react-icons/io5";
-import { LuLayoutDashboard } from "react-icons/lu";
-
+import { LuLayoutDashboard ,LuUsers2} from "react-icons/lu";
+import { RiCouponLine } from "react-icons/ri";
 import {
   MdOutlineProductionQuantityLimits,
-  // MdFormatListBulletedAdd,
   MdAddToQueue,
   MdNotificationsActive,
+  MdAddChart,
 } from "react-icons/md";
 
 // Ant Design Imports
@@ -65,7 +64,7 @@ const MainLayout = () => {
             },
             {
               key: "customers",
-              icon: <AiOutlineUser className="fs-4" />,
+              icon: <LuUsers2 className="fs-4" />,
               label: "Customers",
             },
             {
@@ -119,6 +118,23 @@ const MainLayout = () => {
               key: "orders",
               icon: <FaListCheck className="fs-4" />,
               label: "Orders",
+            },
+            {
+              key: "marketing",
+              icon: <RiCouponLine className="fs-4" />,
+              label: "Marketing",
+              children: [
+                {
+                  key: "coupon",
+                  icon: <MdAddChart className="fs-5" />,
+                  label: "Add Coupon",
+                },
+                {
+                  key: "coupon-list",
+                  icon: <MdAddChart className="fs-5" />,
+                  label: "Coupon List",
+                },
+              ],
             },
             {
               key: "blogs",
@@ -218,7 +234,6 @@ const MainLayout = () => {
             rtl={false}
             pauseOnFocusLoss
             draggable
-            pauseOnHover
             theme="light"
           />
           <Outlet />
