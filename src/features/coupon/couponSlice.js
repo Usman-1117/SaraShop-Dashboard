@@ -2,11 +2,11 @@ import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import couponService from "./couponService";
 
 // Get coupons
-export const getCoupons = createAsyncThunk(
+export const getAllCoupons = createAsyncThunk(
   "coupons/get-coupons",
   async (thunkAPI) => {
     try {
-      return await couponService.getCoupons();
+      return await couponService.getCoupon();
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -42,18 +42,18 @@ export const couponSlice = createSlice({
   extraReducers: (builder) => {
     // Get coupons
     builder
-      .addCase(getCoupons.pending, (state) => {
+      .addCase(getAllCoupons.pending, (state) => {
         state.isLoading = true;
       })
 
-      .addCase(getCoupons.fulfilled, (state, action) => {
+      .addCase(getAllCoupons.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
         state.coupons = action.payload;
       })
 
-      .addCase(getCoupons.rejected, (state, action) => {
+      .addCase(getAllCoupons.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
