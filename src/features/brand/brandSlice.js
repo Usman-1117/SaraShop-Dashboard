@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import brandService from "./brandService";
 
 // Get Brands
@@ -24,10 +24,24 @@ export const createBrands = createAsyncThunk(
     }
   }
 );
+export const resetState = createAction("Reset_all");
+
+// Edit Brand
+export const getABrand = createAsyncThunk(
+  "brands/get-brand",
+  async (id, thunkAPI) => {
+    try {
+      return await brandService.getBrand(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 const initialState = {
   brands: [],
-  createdBrand: [],
+  createdBrand: "",
+  brandName: "",
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -40,42 +54,65 @@ export const brandSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     // Get Brands
-    builder.addCase(getBrands.pending, (state) => {
-      state.isLoading = true;
-    });
+    builder
+      .addCase(getBrands.pending, (state) => {
+        state.isLoading = true;
+      })
 
-    builder.addCase(getBrands.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.isError = false;
-      state.isSuccess = true;
-      state.brands = action.payload;
-    });
+      .addCase(getBrands.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.brands = action.payload;
+      })
 
-    builder.addCase(getBrands.rejected, (state, action) => {
-      state.isLoading = false;
-      state.isError = true;
-      state.isSuccess = false;
-      state.message = action.error;
-    });
+      .addCase(getBrands.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      });
 
     // Create Brands
-    builder.addCase(createBrands.pending, (state) => {
-      state.isLoading = true;
-    });
+    builder
+      .addCase(createBrands.pending, (state) => {
+        state.isLoading = true;
+      })
 
-    builder.addCase(createBrands.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.isError = false;
-      state.isSuccess = true;
-      state.createdBrand = action.payload;
-    });
+      .addCase(createBrands.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.createdBrand = action.payload;
+      })
 
-    builder.addCase(createBrands.rejected, (state, action) => {
-      state.isLoading = false;
-      state.isError = true;
-      state.isSuccess = false;
-      state.message = action.error;
-    });
+      .addCase(createBrands.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(resetState, () => initialState);
+
+    // Edit Brand
+    builder
+      .addCase(getABrand.pending, (state) => {
+        state.isLoading = true;
+      })
+
+      .addCase(getABrand.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.brandName = action.payload.title;
+      })
+
+      .addCase(getABrand.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      });
   },
 });
 

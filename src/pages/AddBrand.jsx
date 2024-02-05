@@ -1,7 +1,7 @@
 import { Form } from "react-bootstrap";
 import CustomInput from "../components/CustomInput";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { useFormik } from "formik";
@@ -9,16 +9,29 @@ import * as Yup from "yup";
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createBrands } from "../features/brand/brandSlice";
+import {
+  createBrands,
+  getABrand,
+  resetState,
+} from "../features/brand/brandSlice";
 
 // Imports End
 
 const AddBrand = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
+  const location = useLocation();
   const newBrand = useSelector((state) => state.brand);
-  const { isSuccess, isError, isLoading, createdBrand } = newBrand;
+  const { isSuccess, isError, isLoading, createdBrand, brandName } = newBrand;
+
+  const getBrandId = location.pathname.split("/")[3];
+  useEffect(() => {
+    if (getBrandId !== undefined) {
+      dispatch(getABrand(getBrandId));
+      values.title = brandName;
+    } else {
+      dispatch(resetState());
+    }
+  }, [getBrandId]);
 
   useEffect(() => {
     if (isSuccess && createdBrand) {
@@ -51,13 +64,15 @@ const AddBrand = () => {
       dispatch(createBrands(values));
       resetForm();
       setTimeout(() => {
-        navigate("/dashboard/brand-list");
+        dispatch(resetState());
       }, 2000);
     },
   });
   return (
     <div>
-      <h3 className="mb-4">Add Brand</h3>
+      <h3 className="mb-4">
+        {getBrandId !== undefined ? "Edit" : "Add"} Brand
+      </h3>
       <div>
         <Form onSubmit={handleSubmit}>
           <CustomInput

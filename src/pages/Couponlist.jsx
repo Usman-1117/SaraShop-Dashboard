@@ -49,7 +49,7 @@ const Couponlist = () => {
   const data = couponState.map((coupon, i) => ({
     key: i + 1,
     name: coupon.name,
-    discount: coupon.discount,
+    discount: `${coupon.discount}%`,
     expiry: new Date(coupon.expiry).toLocaleString(),
     action: (
       <>

@@ -1,8 +1,7 @@
 import { Empty, Table } from "antd";
-import { Link } from "react-router-dom";
 // Icons
-import { FaRegEdit } from "react-icons/fa";
-import { FaTrashCan } from "react-icons/fa6";
+import EditButton from "../components/EditButton";
+import DeleteButton from "../components/DeleteButton";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -38,13 +37,9 @@ const BrandList = () => {
     name: brand.title,
     action: (
       <>
-        <Link to="/" className="fs-5 text-primary">
-          <FaRegEdit />
-        </Link>
+        <EditButton to={`/dashboard/brand/${brand._id}`} />
 
-        <Link to="/" className="ms-4 fs-5 " style={{ color: "#CC0000" }}>
-          <FaTrashCan />
-        </Link>
+        <DeleteButton to="/" />
       </>
     ),
   }));
