@@ -1,22 +1,36 @@
-import { Form } from "react-bootstrap";
 import CustomInput from "../components/CustomInput";
-
-import { toast } from "react-toastify";
+import { Form } from "react-bootstrap";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+import { toast } from "react-toastify";
+
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createCoupons, resetState } from "../features/coupon/couponSlice";
-
+import { useLocation } from "react-router-dom";
+import {
+  createCoupons,
+  getACoupon,
+  resetState,
+} from "../features/coupon/couponSlice";
 // Imports End
 
 const AddCoupon = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const getCouponId = location.pathname.split("/")[3];
 
   const newCoupon = useSelector((state) => state.coupon);
   const { isSuccess, isError, isLoading, createdCoupon } = newCoupon;
+
+  useEffect(() => {
+    if (getCouponId !== undefined) {
+      dispatch(getACoupon(getCouponId));
+    } else {
+      dispatch(resetState());
+    }
+  }, [getCouponId]);
 
   useEffect(() => {
     if (isSuccess && createdCoupon) {
@@ -36,6 +50,7 @@ const AddCoupon = () => {
     errors,
     resetForm,
   } = useFormik({
+    enableReinitialize: true,
     initialValues: {
       name: "",
       expiry: "",
@@ -51,13 +66,15 @@ const AddCoupon = () => {
     onSubmit: (values) => {
       //   alert(JSON.stringify(values));
       dispatch(createCoupons(values));
-      dispatch(resetState());
       resetForm();
+      dispatch(resetState());
     },
   });
   return (
     <div>
-      <h3 className="my-3">Add Coupon</h3>
+      <h3 className="my-3">
+        {getCouponId !== undefined ? "Update" : "Add"} Coupon
+      </h3>
       <div>
         <Form onSubmit={handleSubmit}>
           {/* Coupon Name */}
@@ -108,7 +125,7 @@ const AddCoupon = () => {
           {/* button */}
           <div className="py-3">
             <button type="submit" className="button border-0">
-              Add Coupon
+              {getCouponId !== undefined ? "Update" : "Add"} Coupon
             </button>
           </div>
         </Form>

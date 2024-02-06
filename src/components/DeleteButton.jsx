@@ -1,21 +1,20 @@
 import { PiTrashSimple } from "react-icons/pi";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const DeleteButton = ({ to }) => {
+const DeleteButton = ({ onClick }) => {
   return (
-    <Link
-      to={to}
-      className="ms-3 border border-danger rounded-2"
+    <button
+      onClick={onClick}
+      className="ms-3 border border-danger rounded-2 bg-transparent"
       style={{ color: "#CC0000", padding: "4px 6px" }}
     >
       <PiTrashSimple fontSize={18} />
-    </Link>
+    </button>
   );
 };
 
 DeleteButton.propTypes = {
-  to: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default DeleteButton;

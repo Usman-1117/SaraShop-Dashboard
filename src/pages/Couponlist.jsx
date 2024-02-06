@@ -7,8 +7,9 @@ import DeleteButton from "../components/DeleteButton";
 import { RiEdit2Line } from "react-icons/ri";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getAllCoupons } from "../features/coupon/couponSlice";
+import { useEffect, useState } from "react";
+import { deleteACoupon, getAllCoupons } from "../features/coupon/couponSlice";
+import CustomModal from "../components/CustomModal";
 
 const columns = [
   {
@@ -38,6 +39,9 @@ const columns = [
 ];
 
 const Couponlist = () => {
+  const [open, setOpen] = useState(false);
+  const [couponId, setCouponId] = useState("");
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -53,17 +57,32 @@ const Couponlist = () => {
     expiry: new Date(coupon.expiry).toLocaleString(),
     action: (
       <>
-        <EditButton to="/" />
-        <DeleteButton to="/" />
+        <EditButton to={`/dashboard/coupon/${coupon._id}`} />
+        <DeleteButton onClick={() => showModal(coupon._id)} />
       </>
     ),
   }));
+
+  // Delete A Coupon
+  const showModal = (e) => {
+    setOpen(true);
+    setCouponId(e);
+  };
+  const hideModal = () => {
+    setOpen(false);
+  };
+
+  const deleteCoupon = (e) => {
+    dispatch(deleteACoupon(e));
+    dispatch(getAllCoupons());
+    setOpen(false);
+  };
   return (
     <div>
       <div className="d-flex justify-content-between align-items-center my-2 mb-3">
         <h3 className="page-title">Coupon List</h3>
 
-        {/* Add Coupon */}
+        {/* Add Coupon Button */}
         <Link
           to={"/dashboard/coupon"}
           className="button rounded-1 d-flex gap-1"
@@ -72,8 +91,9 @@ const Couponlist = () => {
           <RiEdit2Line fontSize={20} />
           <span>Add Coupon</span>
         </Link>
-        {/* Add Coupon End */}
+        {/* Add Coupon End Button */}
       </div>
+
       {couponState.length > 0 ? (
         <div className="table-container">
           <Table columns={columns} dataSource={data} />
@@ -81,6 +101,13 @@ const Couponlist = () => {
       ) : (
         <Empty description="No data available" />
       )}
+
+      <CustomModal
+        hideModal={hideModal}
+        open={open}
+        performAction={() => deleteCoupon(couponId)}
+        title="Are you sure you want to delete this Coupon?"
+      />
     </div>
   );
 };

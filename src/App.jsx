@@ -39,8 +39,8 @@ const App = () => {
           <Route path="/" element={<Login />} />
           <Route path="/forgot-password" element={<Forgotpassword />} />
           <Route path="/reset-password" element={<Resetpassword />} />
-          {/* Pages */}
 
+          {/* Pages */}
           <Route path="/dashboard" element={<MainLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="customers" element={<Customers />} />
@@ -55,6 +55,7 @@ const App = () => {
             <Route path="color-list" element={<ColorList />} />
             <Route path="orders" element={<Orders />} />
             <Route path="coupon" element={<AddCoupon />} />
+            <Route path="coupon/:id" element={<AddCoupon />} />
             <Route path="coupon-list" element={<Couponlist />} />
             <Route path="blog" element={<AddBlog />} />
             <Route path="blog-list" element={<Bloglist />} />
