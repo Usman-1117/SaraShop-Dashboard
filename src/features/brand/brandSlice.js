@@ -2,7 +2,7 @@ import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import brandService from "./brandService";
 
 // Get Brands
-export const getBrands = createAsyncThunk(
+export const getAllBrands = createAsyncThunk(
   "brands/get-brands",
   async (thunkAPI) => {
     try {
@@ -24,11 +24,10 @@ export const createBrands = createAsyncThunk(
     }
   }
 );
-export const resetState = createAction("Reset_all");
 
-// Edit Brand
+// get a Brand
 export const getABrand = createAsyncThunk(
-  "brands/get-brand",
+  "brand/get-brand",
   async (id, thunkAPI) => {
     try {
       return await brandService.getBrand(id);
@@ -38,10 +37,34 @@ export const getABrand = createAsyncThunk(
   }
 );
 
+// Update a Brand
+export const updateABrand = createAsyncThunk(
+  "brand/update-brand",
+  async (brand, thunkAPI) => {
+    try {
+      return await brandService.updateBrand(brand);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+// Delete Brand
+export const deleteABrand = createAsyncThunk(
+  "brand/delete-brand",
+  async (id, thunkAPI) => {
+    try {
+      return await brandService.deleteBrand(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const resetState = createAction("Reset_all");
+
 const initialState = {
   brands: [],
-  createdBrand: "",
-  brandName: "",
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -53,66 +76,75 @@ export const brandSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // Get Brands
     builder
-      .addCase(getBrands.pending, (state) => {
+      // Get All Brands
+      .addCase(getAllBrands.pending, (state) => {
         state.isLoading = true;
       })
-
-      .addCase(getBrands.fulfilled, (state, action) => {
+      .addCase(getAllBrands.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
         state.brands = action.payload;
       })
-
-      .addCase(getBrands.rejected, (state, action) => {
+      .addCase(getAllBrands.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
-      });
+      })
 
-    // Create Brands
-    builder
+      // Create Brands
       .addCase(createBrands.pending, (state) => {
         state.isLoading = true;
       })
-
       .addCase(createBrands.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
         state.createdBrand = action.payload;
       })
-
       .addCase(createBrands.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
       })
-      .addCase(resetState, () => initialState);
 
-    // Edit Brand
-    builder
+      // get a Brand
       .addCase(getABrand.pending, (state) => {
         state.isLoading = true;
       })
-
       .addCase(getABrand.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
         state.brandName = action.payload.title;
       })
-
       .addCase(getABrand.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
-      });
+      })
+
+      // Update Brand
+      .addCase(updateABrand.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateABrand.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.updatedBrand = action.payload;
+      })
+      .addCase(updateABrand.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(resetState, () => initialState);
   },
 });
 

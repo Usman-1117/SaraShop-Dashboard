@@ -10,7 +10,7 @@ import { TbBrandStripe, TbZoomInArea } from "react-icons/tb";
 import { BiCategory, BiSolidColorFill } from "react-icons/bi";
 import { FaBloggerB, FaListCheck } from "react-icons/fa6";
 import { IoBagAddOutline, IoLogoStencil } from "react-icons/io5";
-import { LuLayoutDashboard ,LuUsers2} from "react-icons/lu";
+import { LuLayoutDashboard, LuUsers2 } from "react-icons/lu";
 import { RiCouponLine } from "react-icons/ri";
 import {
   MdOutlineProductionQuantityLimits,
@@ -226,15 +226,15 @@ const MainLayout = () => {
           }}
         >
           <ToastContainer
-            position="top-right"
-            autoClose={1200}
+            position="bottom-right"
+            autoClose={600}
             hideProgressBar={false}
             newestOnTop={true}
             closeOnClick
             rtl={false}
             pauseOnFocusLoss
             draggable
-            theme="light"
+            theme="dark"
           />
           <Outlet />
         </Content>
