@@ -20,7 +20,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getAllBrands } from "../features/brand/brandSlice";
-import { getCategories } from "../features/prodCategory/prodCategorySlice";
+import { getAllCategories } from "../features/prodCategory/prodCategorySlice";
 import { createProducts, resetState } from "../features/product/productSlice";
 // import { getColors } from "../features/color/colorSlice";
 // import { uploadImg } from "../features/upload/uploadSlice";
@@ -35,7 +35,7 @@ const AddProduct = () => {
 
   useEffect(() => {
     dispatch(getAllBrands());
-    dispatch(getCategories());
+    dispatch(getAllCategories());
     // dispatch(getColors());
   }, [dispatch]);
 
