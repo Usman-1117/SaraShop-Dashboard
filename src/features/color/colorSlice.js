@@ -1,7 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import colorService from "./colorService";
 
-export const getColors = createAsyncThunk(
+// Get All Colors
+export const getAllColors = createAsyncThunk(
   "colors/get-colors",
   async (thunkAPI) => {
     try {
@@ -11,6 +12,56 @@ export const getColors = createAsyncThunk(
     }
   }
 );
+
+//  Create Colors
+export const createColors = createAsyncThunk(
+  "color/create-color",
+  async (colorData, thunkAPI) => {
+    try {
+      return await colorService.createColors(colorData);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+// Get Color Id
+export const getAColor = createAsyncThunk(
+  "color/get-color",
+  async (id, thunkAPI) => {
+    try {
+      return await colorService.getColor(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+// Update a Color
+export const updateAColor = createAsyncThunk(
+  "color/update-color",
+  async (color, thunkAPI) => {
+    try {
+      return await colorService.updateColor(color);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+// Update a Color
+export const deleteAColor = createAsyncThunk(
+  "color/delete-color",
+  async (id, thunkAPI) => {
+    try {
+      return await colorService.deleteColor(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const resetState = createAction("Reset_all");
 
 const initialState = {
   colors: [],
@@ -25,23 +76,75 @@ export const colorSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getColors.pending, (state) => {
-      state.isLoading = true;
-    });
+    builder
+      // Get All Colors
+      .addCase(getAllColors.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllColors.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.colors = action.payload;
+      })
+      .addCase(getAllColors.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
 
-    builder.addCase(getColors.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.isError = false;
-      state.isSuccess = true;
-      state.colors = action.payload;
-    });
+      // Create Colors
+      .addCase(createColors.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createColors.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.createdColor = action.payload;
+      })
+      .addCase(createColors.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      // Get A Color
 
-    builder.addCase(getColors.rejected, (state, action) => {
-      state.isLoading = false;
-      state.isError = true;
-      state.isSuccess = false;
-      state.message = action.error;
-    });
+      .addCase(getAColor.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAColor.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.colorName = action.payload;
+      })
+      .addCase(getAColor.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+
+      // Update A Color
+      .addCase(updateAColor.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateAColor.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.updatedColor = action.payload;
+      })
+      .addCase(updateAColor.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(resetState, () => initialState);
   },
 });
 
