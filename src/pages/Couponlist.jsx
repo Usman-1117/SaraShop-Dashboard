@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { deleteACoupon, getAllCoupons } from "../features/coupon/couponSlice";
 import CustomModal from "../components/CustomModal";
+import { toast } from "react-toastify";
 
 const columns = [
   {
@@ -72,17 +73,24 @@ const Couponlist = () => {
     setOpen(false);
   };
 
-  const deleteCoupon = (e) => {
-    dispatch(deleteACoupon(e));
-    dispatch(getAllCoupons());
-    setOpen(false);
+  const deleteCoupon = (id) => {
+    try {
+      dispatch(deleteACoupon(id));
+      toast.success("Coupon deleted successfully!");
+      setOpen(false);
+    } catch (error) {
+      toast.error("Failed to delete Coupon.");
+    }
+    setTimeout(() => {
+      dispatch(getAllCoupons());
+    }, 100);
   };
   return (
     <div>
+      {/* Page Title & Add Button */}
       <div className="d-flex justify-content-between align-items-center my-2 mb-3">
         <h3 className="page-title">Coupon List</h3>
 
-        {/* Add Coupon Button */}
         <Link
           to={"/dashboard/coupon"}
           className="button rounded-1 d-flex gap-1"
@@ -91,9 +99,10 @@ const Couponlist = () => {
           <RiEdit2Line fontSize={20} />
           <span>Add Coupon</span>
         </Link>
-        {/* Add Coupon End Button */}
       </div>
+      {/* Page Title & Add Button End*/}
 
+      {/* Table */}
       {couponState.length > 0 ? (
         <div className="table-container">
           <Table columns={columns} dataSource={data} />
@@ -101,13 +110,16 @@ const Couponlist = () => {
       ) : (
         <Empty description="No data available" />
       )}
+      {/* Table End */}
 
+      {/* Delete Modal */}
       <CustomModal
         hideModal={hideModal}
         open={open}
         performAction={() => deleteCoupon(couponId)}
         title="Are you sure you want to delete this Coupon?"
       />
+      {/* Delete Modal */}
     </div>
   );
 };

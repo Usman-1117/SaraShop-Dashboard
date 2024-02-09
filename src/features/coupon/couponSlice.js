@@ -119,9 +119,10 @@ export const couponSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.couponName = action.payload[0].name;
-        state.couponDiscount = action.payload[0].discount;
-        state.couponExpiry = action.payload[0].expiry;
+        const coupon = action.payload;
+        state.couponName = coupon.name;
+        state.couponDiscount = coupon.discount;
+        state.couponExpiry = coupon.expiry;
       })
       .addCase(getACoupon.rejected, (state, action) => {
         state.isLoading = false;
@@ -138,28 +139,12 @@ export const couponSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.couponName = action.payload[0].name;
-        state.couponDiscount = action.payload[0].discount;
-        state.couponExpiry = action.payload[0].expiry;
+        const coupon = action.payload;
+        state.couponName = coupon.name;
+        state.couponDiscount = coupon.discount;
+        state.couponExpiry = coupon.expiry;
       })
       .addCase(updateACoupon.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.isSuccess = false;
-        state.message = action.error;
-      })
-
-      // Delete Coupon
-      .addCase(deleteACoupon.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(deleteACoupon.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isError = false;
-        state.isSuccess = true;
-        state.deletedCoupon = action.payload;
-      })
-      .addCase(deleteACoupon.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
