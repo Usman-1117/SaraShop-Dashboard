@@ -21,14 +21,15 @@ import ColorList from "./pages/ColorList";
 
 import Orders from "./pages/Orders";
 
+import AddCoupon from "./pages/AddCoupon";
+import Couponlist from "./pages/Couponlist";
+
 import AddBlog from "./pages/AddBlog";
 import Bloglist from "./pages/Bloglist";
 import AddBlogCat from "./pages/AddBlogCat";
-import BlogCatlist from "./pages/BlogCatlist";
+import BlogCatList from "./pages/BlogCatList";
 
 import Enquiries from "./pages/Enquiries";
-import AddCoupon from "./pages/AddCoupon";
-import Couponlist from "./pages/Couponlist";
 import NoPage from "./components/NoPage";
 
 const App = () => {
@@ -63,7 +64,8 @@ const App = () => {
             <Route path="blog" element={<AddBlog />} />
             <Route path="blog-list" element={<Bloglist />} />
             <Route path="blog-category" element={<AddBlogCat />} />
-            <Route path="blog-category-list" element={<BlogCatlist />} />
+            <Route path="blog-category/:id" element={<AddBlogCat />} />
+            <Route path="blog-category-list" element={<BlogCatList />} />
             <Route path="enquiries" element={<Enquiries />} />
           </Route>
           <Route path="*" element={<NoPage />} />

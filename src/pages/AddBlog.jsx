@@ -9,17 +9,17 @@ import { Select } from "antd";
 import CustomSelect from "../components/CustomSelect";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getCategories } from "../features/blogCategory/blogCategorySlice";
 import { toast } from "react-toastify";
 import { createBlogs, resetState } from "../features/blogs/blogSlice";
 import { useNavigate } from "react-router-dom";
+import { getAllCategories } from "../features/prodCategory/prodCategorySlice";
 
 const AddBlog = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getCategories());
+    dispatch(getAllCategories());
   }, [dispatch]);
 
   const categoryState = useSelector(
