@@ -8,7 +8,7 @@ const CustomModal = ({ open, hideModal, performAction, title }) => {
       open={open}
       onOk={performAction}
       onCancel={hideModal}
-      okText="OK"
+      okText="Yes"
       cancelText="Cancel"
     >
       <p>{title}</p>

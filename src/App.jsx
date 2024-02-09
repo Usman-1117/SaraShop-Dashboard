@@ -29,6 +29,7 @@ import BlogCatlist from "./pages/BlogCatlist";
 import Enquiries from "./pages/Enquiries";
 import AddCoupon from "./pages/AddCoupon";
 import Couponlist from "./pages/Couponlist";
+import NoPage from "./components/NoPage";
 
 const App = () => {
   return (
@@ -65,6 +66,7 @@ const App = () => {
             <Route path="blog-category-list" element={<BlogCatlist />} />
             <Route path="enquiries" element={<Enquiries />} />
           </Route>
+          <Route path="*" element={<NoPage />} />
         </Routes>
       </BrowserRouter>
     </>
