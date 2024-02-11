@@ -9,46 +9,59 @@ const CustomSelect = ({
   value,
   onChange,
   onBlur,
-  defaultValue,
   options,
-  children,
+  defaultValue,
 }) => {
   const filterOption = (input, option) =>
     (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
   return (
-    <>
-      <Select
-        allowClear
-        showSearch
-        mode={mode}
-        optionFilterProp="children"
-        filterOption={filterOption}
-        placeholder={placeholder}
-        id={id}
-        name={name}
-        value={value}
-        onChange={onChange}
-        onBlur={onBlur}
-        defaultValue={defaultValue}
-        options={options}
-        style={{ height: "56px", width: "100%" }}
-      >
-        {children}
-      </Select>
-    </>
+    <Select
+      allowClear
+      showSearch
+      mode={mode}
+      optionFilterProp="children"
+      filterOption={filterOption}
+      placeholder={placeholder}
+      id={id}
+      name={name}
+      value={value}
+      onChange={onChange}
+      onBlur={onBlur}
+      defaultValue={defaultValue}
+      style={{ height: "56px", width: "100%" }}
+    >
+      <Select.Option value="" label="Select Category" disabled>
+        Select Category
+      </Select.Option>
+
+      {options.map((option) => (
+        <Select.Option
+          key={option.value}
+          value={option.value}
+          label={option.label}
+        >
+          {option.label}
+        </Select.Option>
+      ))}
+    </Select>
   );
 };
+
 CustomSelect.propTypes = {
   mode: PropTypes.string,
   placeholder: PropTypes.string,
+  defaultValue: PropTypes.array,
   id: PropTypes.string,
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
-  defaultValue: PropTypes.array,
-  options: PropTypes.array,
-  children: PropTypes.node,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      label: PropTypes.string,
+    })
+  ),
 };
 
 export default CustomSelect;

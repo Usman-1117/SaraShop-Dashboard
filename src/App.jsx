@@ -25,7 +25,7 @@ import AddCoupon from "./pages/AddCoupon";
 import Couponlist from "./pages/Couponlist";
 
 import AddBlog from "./pages/AddBlog";
-import Bloglist from "./pages/Bloglist";
+import BlogList from "./pages/BlogList";
 import AddBlogCat from "./pages/AddBlogCat";
 import BlogCatList from "./pages/BlogCatList";
 
@@ -62,7 +62,8 @@ const App = () => {
             <Route path="coupon/:id" element={<AddCoupon />} />
             <Route path="coupon-list" element={<Couponlist />} />
             <Route path="blog" element={<AddBlog />} />
-            <Route path="blog-list" element={<Bloglist />} />
+            <Route path="blog/:id" element={<AddBlog />} />
+            <Route path="blog-list" element={<BlogList />} />
             <Route path="blog-category" element={<AddBlogCat />} />
             <Route path="blog-category/:id" element={<AddBlogCat />} />
             <Route path="blog-category-list" element={<BlogCatList />} />
