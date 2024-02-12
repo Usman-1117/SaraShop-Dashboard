@@ -30,6 +30,7 @@ import AddBlogCat from "./pages/AddBlogCat";
 import BlogCatList from "./pages/BlogCatList";
 
 import Enquiries from "./pages/Enquiries";
+import ViewEnquiry from "./pages/ViewEnquiry";
 import NoPage from "./components/NoPage";
 
 const App = () => {
@@ -68,6 +69,7 @@ const App = () => {
             <Route path="blog-category/:id" element={<AddBlogCat />} />
             <Route path="blog-category-list" element={<BlogCatList />} />
             <Route path="enquiries" element={<Enquiries />} />
+            <Route path="enquiries/:id" element={<ViewEnquiry />} />
           </Route>
           <Route path="*" element={<NoPage />} />
         </Routes>
