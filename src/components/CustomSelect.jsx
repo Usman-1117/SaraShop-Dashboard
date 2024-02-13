@@ -31,7 +31,7 @@ const CustomSelect = ({
       style={{ height: "56px", width: "100%" }}
     >
       <Select.Option value="" label="Select Category" disabled>
-        Select Category
+        {placeholder}
       </Select.Option>
 
       {options.map((option) => (

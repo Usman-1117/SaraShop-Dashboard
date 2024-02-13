@@ -2,7 +2,7 @@ import axios from "axios";
 import { base_url } from "../../utils/base_url";
 import { config } from "../../utils/axiosconfig";
 
-//? Login
+// Login
 const login = async (user) => {
   const response = await axios.post(`${base_url}user/admin-login`, user);
   if (response.data) {
@@ -11,15 +11,27 @@ const login = async (user) => {
   return response.data;
 };
 
-//? Get Orders
+// Get All Orders
 const getOrders = async () => {
   const response = await axios.get(`${base_url}user/all-orders/`, config);
+  return response.data;
+};
+
+// Get Order
+const getOrder = async (id) => {
+  const response = await axios.post(
+    `${base_url}user/getorderbyuser/${id}`,
+    "",
+    config
+  );
+
   return response.data;
 };
 
 const authService = {
   login,
   getOrders,
+  getOrder,
 };
 
 export default authService;

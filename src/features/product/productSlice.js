@@ -2,7 +2,7 @@ import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import productService from "./productService";
 
 // Get Products
-export const getProducts = createAsyncThunk(
+export const getAllProducts = createAsyncThunk(
   "product/get-products",
   async (thunkAPI) => {
     try {
@@ -14,11 +14,47 @@ export const getProducts = createAsyncThunk(
 );
 
 // Create Product
-export const createProducts = createAsyncThunk(
-  "product/create-products",
+export const createProduct = createAsyncThunk(
+  "product/create-product",
   async (productData, thunkAPI) => {
     try {
       return await productService.createProduct(productData);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+// Get A Product
+export const getAProduct = createAsyncThunk(
+  "product/get-product",
+  async (id, thunkAPI) => {
+    try {
+      return await productService.getProduct(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+// Update Product
+export const updateAProduct = createAsyncThunk(
+  "product/update-product",
+  async (product, thunkAPI) => {
+    try {
+      return await productService.updateProduct(product);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+// Delete Product
+export const deleteAProduct = createAsyncThunk(
+  "product/delete-product",
+  async (id, thunkAPI) => {
+    try {
+      return await productService.deleteProduct(id);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -29,7 +65,6 @@ export const resetState = createAction("Reset_all");
 
 const initialState = {
   products: [],
-  createdProduct: "",
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -42,39 +77,82 @@ export const productSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // Get Products
-      .addCase(getProducts.pending, (state) => {
+      // Get All Products
+      .addCase(getAllProducts.pending, (state) => {
         state.isLoading = true;
       })
-
-      .addCase(getProducts.fulfilled, (state, action) => {
+      .addCase(getAllProducts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
         state.products = action.payload;
       })
-
-      .addCase(getProducts.rejected, (state, action) => {
+      .addCase(getAllProducts.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
-      });
-
-    // Create Products
-    builder
-      .addCase(createProducts.pending, (state) => {
-        state.isLoading = true;
       })
 
-      .addCase(createProducts.fulfilled, (state, action) => {
+      // Create Product
+      .addCase(createProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createProduct.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
         state.createdProduct = action.payload;
       })
+      .addCase(createProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
 
-      .addCase(createProducts.rejected, (state, action) => {
+      // Get A Product
+      .addCase(getAProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        const product = action.payload;
+        state.title = product.title;
+        state.description = product.description;
+        state.price = product.price;
+        state.category = product.category;
+        state.brand = product.brand;
+        state.tags = product.tags;
+        state.quantity = product.quantity;
+      })
+      .addCase(getAProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+
+      // Update A Product
+      .addCase(updateAProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateAProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        const product = action.payload;
+        state.title = product.title;
+        state.description = product.description;
+        state.price = product.price;
+        state.category = product.category;
+        state.brand = product.brand;
+        state.tags = product.tags;
+        state.quantity = product.quantity;
+      })
+      .addCase(updateAProduct.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;

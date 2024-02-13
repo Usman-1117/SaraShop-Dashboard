@@ -25,6 +25,18 @@ export const getOrders = createAsyncThunk(
   }
 );
 
+// Get Order By User
+export const getOrderByUser = createAsyncThunk(
+  "order/get-order",
+  async (id, thunkAPI) => {
+    try {
+      return await authService.getOrder(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 // States
 const getUserFromLocalStorage = localStorage.getItem("user")
   ? JSON.parse(localStorage.getItem("user"))
@@ -44,42 +56,57 @@ export const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // Login
-    builder.addCase(login.pending, (state) => {
-      state.isLoading = true;
-    });
+    builder
+      // Login
+      .addCase(login.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.user = null;
+        state.message = action.payload;
+      })
 
-    builder.addCase(login.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.isSuccess = true;
-      state.user = action.payload;
-    });
+      // Get All Orders
+      .addCase(getOrders.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getOrders.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.orders = action.payload;
+      })
+      .addCase(getOrders.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.payload;
+      })
 
-    builder.addCase(login.rejected, (state, action) => {
-      state.isLoading = false;
-      state.isError = true;
-      state.isSuccess = false;
-      state.user = null;
-      state.message = action.payload;
-    });
-
-    // Get Orders
-    builder.addCase(getOrders.pending, (state) => {
-      state.isLoading = true;
-    });
-
-    builder.addCase(getOrders.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.isSuccess = true;
-      state.orders = action.payload;
-    });
-
-    builder.addCase(getOrders.rejected, (state, action) => {
-      state.isLoading = false;
-      state.isError = true;
-      state.isSuccess = false;
-      state.message = action.payload;
-    });
+      // Get Order By User
+      .addCase(getOrderByUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getOrderByUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.orderbyuser = action.payload;
+        state.message = "success";
+      })
+      .addCase(getOrderByUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.payload;
+      });
   },
 });
 

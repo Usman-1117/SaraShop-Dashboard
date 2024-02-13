@@ -1,83 +1,80 @@
-import { useEffect } from "react";
+// Libraries
+import { Select, Spin } from "antd";
 import { Form } from "react-bootstrap";
-import { Select } from "antd";
-// Icons
-// import { MdFileUpload } from "react-icons/md";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { toast } from "react-toastify";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 // Components
 import CustomInput from "../components/CustomInput";
 import CustomSelect from "../components/CustomSelect";
 import ValidationError from "../components/ValidationError";
-// Libraries
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-// import Dropzone from "react-dropzone";
-
 // Data Fetching
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
 import { getAllBrands } from "../features/brand/brandSlice";
 import { getAllCategories } from "../features/prodCategory/prodCategorySlice";
-import { createProducts, resetState } from "../features/product/productSlice";
-// import { getColors } from "../features/color/colorSlice";
-// import { uploadImg } from "../features/upload/uploadSlice";
-
+import {
+  createProduct,
+  getAProduct,
+  resetState,
+  updateAProduct,
+} from "../features/product/productSlice";
 // Imports End
 
 const AddProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // const [color, setColor] = useState([]);
+  const location = useLocation();
+  const getProductId = location.pathname.split("/")[3];
 
   useEffect(() => {
     dispatch(getAllBrands());
     dispatch(getAllCategories());
-    // dispatch(getColors());
   }, [dispatch]);
 
-  //* 1
+  //* Get Brands
   const brandState = useSelector((state) => state.brand.brands);
-  //* 2
+  //* Get Category
   const categoryState = useSelector(
     (state) => state.prodCategory.prodCategories
   );
-  //* 3
-  // const colorState = useSelector((state) => state.color.colors);
-  // const colorOpt = [];
-  // colorState.forEach((i) => {
-  //   colorOpt.push({
-  //     label: i.title,
-  //     value: i._id,
-  //   });
-  // });
-  // const handleColor = (e) => {
-  //   setColor(e);
-  //   console.log(e);
-  // };
 
-  //* 4
-  // const imgState = useSelector((state) => state.upload.images);
-
-  // useEffect(() => {
-  //   values.color = color ? color : " ";
-  // });
-
-  //* 5
   const newProduct = useSelector((state) => state.product);
-  const { isSuccess, isError, isLoading, createdProduct } = newProduct;
+  const {
+    isSuccess,
+    isError,
+    isLoading,
+    createdProduct,
+    title,
+    description,
+    price,
+    category,
+    brand,
+    tags,
+    quantity,
+  } = newProduct;
 
+  // Create New Prodcut
   useEffect(() => {
-    if (isSuccess && createdProduct) {
+    if (createdProduct && isSuccess) {
       toast.success("Product Added Successfully!");
     }
     if (isError) {
       toast.error("Something Went Wrong!");
     }
   }, [isSuccess, isError, isLoading, createdProduct]);
+
+  // Update Product
+  useEffect(() => {
+    if (getProductId !== undefined) {
+      dispatch(getAProduct(getProductId));
+    } else {
+      dispatch(resetState());
+    }
+  }, [getProductId, dispatch]);
 
   const {
     handleSubmit,
@@ -86,17 +83,17 @@ const AddProduct = () => {
     values,
     touched,
     errors,
-    resetForm,
+    isSubmitting,
   } = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      title: "",
-      description: "",
-      brand: "",
-      category: "",
-      tags: "",
-      // colors: [],
-      price: "",
-      quantity: "",
+      title: title || "",
+      description: description || "",
+      brand: brand || "",
+      category: category || "",
+      tags: tags || "",
+      price: price || "",
+      quantity: quantity || "",
     },
 
     validationSchema: Yup.object({
@@ -105,28 +102,43 @@ const AddProduct = () => {
       brand: Yup.string().required("Brand is Required!"),
       category: Yup.string().required("Category is Required!"),
       tags: Yup.string().required("Tags is Required!"),
-      // colors: Yup.array()
-      //   .min(1, "Pick at least one color")
-      //   .required("Color is Required"),
       price: Yup.number().required("Price is Required!"),
       quantity: Yup.number().required("Quantity is Required!"),
     }),
 
     onSubmit: (values) => {
-      // alert(JSON.stringify(values));
-      dispatch(createProducts(values));
-      resetForm();
+      if (getProductId !== undefined) {
+        const data = { id: getProductId, productData: values };
+        dispatch(updateAProduct(data));
+      }
+      if (
+        title &&
+        description &&
+        brand &&
+        category &&
+        tags &&
+        price &&
+        quantity &&
+        isSuccess
+      ) {
+        toast.success("Product Updated Successfully!");
+      } else {
+        dispatch(createProduct(values));
+      }
+
       setTimeout(() => {
         navigate("/dashboard/product-list");
         dispatch(resetState());
-      }, 2000);
+      }, 800);
     },
   });
 
   return (
     <div>
       <div className="bg-white p-3 p-lg-4 rounded-3">
-        <h3 className="page-title mb-4">Add Product</h3>
+        <h3 className="page-title mb-4">
+          {getProductId ? "Edit" : "Add"} Product
+        </h3>
 
         {/* Form */}
         <Form onSubmit={handleSubmit}>
@@ -165,24 +177,15 @@ const AddProduct = () => {
                 id="selectBrand"
                 status="error"
                 name="brand"
+                placeholder="Select Brand"
                 value={values.brand}
                 onChange={handleChange("brand")}
                 onBlur={handleBlur("brand")}
-              >
-                <Select.Option value="" label="Select Brand" disabled>
-                  Select Brand
-                </Select.Option>
-                {brandState.map((brand, i) => (
-                  <Select.Option
-                    key={i}
-                    value={brand.title}
-                    label={brand.title}
-                  >
-                    {brand.title}
-                  </Select.Option>
-                ))}
-              </CustomSelect>
-
+                options={brandState.map((brand) => ({
+                  value: brand.title,
+                  label: brand.title,
+                }))}
+              />
               <ValidationError touched={touched.brand} errors={errors.brand} />
             </div>
 
@@ -195,20 +198,11 @@ const AddProduct = () => {
                 value={values.category}
                 onChange={handleChange("category")}
                 onBlur={handleBlur("category")}
-              >
-                <Select.Option value="" label="Select Category" disabled>
-                  Select Category
-                </Select.Option>
-                {categoryState.map((Category, i) => (
-                  <Select.Option
-                    key={i}
-                    value={Category.title}
-                    label={Category.title}
-                  >
-                    {Category.title}
-                  </Select.Option>
-                ))}
-              </CustomSelect>
+                options={categoryState.map((Category) => ({
+                  value: Category.title,
+                  label: Category.title,
+                }))}
+              />
               <ValidationError
                 touched={touched.category}
                 errors={errors.category}
@@ -218,40 +212,27 @@ const AddProduct = () => {
 
           {/* Tags */}
           <div className="d-flex flex-column flex-grow-1 mb-3">
-            <CustomSelect
+            <Select
               placeholder="Select Tags"
               id="selectTags"
               name="tags"
               value={values.tags}
               onChange={handleChange("tags")}
               onBlur={handleBlur("tags")}
+              style={{ height: "56px" }}
             >
               <Select.Option value="" label="Select Tags" disabled>
                 Select Tags
               </Select.Option>
 
-              <Select.Option value="featured">Featured</Select.Option>
-              <Select.Option value="special">Special</Select.Option>
-              <Select.Option value="poplur">Poplur</Select.Option>
-            </CustomSelect>
+              <Select.Option value="Featured">Featured</Select.Option>
+              <Select.Option value="Special">Special</Select.Option>
+              <Select.Option value="Poplur">Poplur</Select.Option>
+            </Select>
             <ValidationError touched={touched.tags} errors={errors.tags} />
           </div>
 
           {/* Select Color */}
-          {/* <div className="mb-3">
-            <CustomSelect
-              mode="multiple"
-              placeholder="Select Colors"
-              defaultValue={color}
-              id="selectcolor"
-              name="color"
-              value={values.color}
-              onChange={(i) => handleColor(i)}
-              options={colorOpt}
-              onBlur={handleBlur("color")}
-            />
-            <ValidationError touched={touched.colors} errors={errors.colors} />
-          </div> */}
 
           {/* Select Price & Select Quantity*/}
           <div className="d-flex flex-column flex-lg-row gap-0 gap-lg-2">
@@ -286,48 +267,18 @@ const AddProduct = () => {
           </div>
 
           {/* Upload Img */}
-          {/* <div className="border border-1 p-5 text-center rounded-2">
-            <Dropzone
-              onDrop={(acceptedFiles) => dispatch(uploadImg(acceptedFiles))}
-            >
-              {({ getRootProps, getInputProps }) => (
-                <section>
-                  <div {...getRootProps()}>
-                    <input {...getInputProps()} />
-
-                    <div
-                      className="d-flex flex-column gap-2"
-                      style={{ cursor: "pointer" }}
-                    >
-                      <p className="upload-icon">
-                        <MdFileUpload fontSize={40} />
-                      </p>
-                      <p className="upload-text">
-                        Click or drag file to this area to upload
-                      </p>
-                    </div>
-                  </div>
-                </section>
-              )}
-            </Dropzone>
-          </div>
-          <div className="product-images">
-            {Array.isArray(imgState) &&
-              imgState.map((img, i) => {
-                return (
-                  <div key={i}>
-                    <img src={img.url} alt="" />
-                  </div>
-                );
-              })}
-          </div> */}
 
           {/* Button */}
-          <div className="py-4">
-            <button type="submit" className="button border-0">
-              {isLoading ? "Adding Product..." : "Add Product"}
-            </button>
-          </div>
+          <button type="submit" className="button border-0 mt-3">
+            {isSubmitting ? (
+              <div className="d-flex gap-2">
+                <Spin />
+                <span>Loading...</span>
+              </div>
+            ) : (
+              <>{getProductId !== undefined ? "Update" : "Add"} Product</>
+            )}
+          </button>
         </Form>
       </div>
     </div>

@@ -1,14 +1,14 @@
 import { Empty, Table } from "antd";
 
-import { Link } from "react-router-dom";
 // Icons
-import { FaRegEdit } from "react-icons/fa";
-import { FaTrashCan } from "react-icons/fa6";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 import { getOrders } from "../features/auth/authSlice";
+import DeleteButton from "../components/DeleteButton";
+import EditButton from "../components/EditButton";
+import { Link } from "react-router-dom";
 
 const columns = [
   {
@@ -16,9 +16,24 @@ const columns = [
     dataIndex: "key",
   },
   {
-    title: "Title",
-    dataIndex: "title",
-    // sorter: (a, b) => a.title.localeCompare(b.title),
+    title: "Name",
+    dataIndex: "name",
+  },
+  {
+    title: "Amount",
+    dataIndex: "amount",
+  },
+  {
+    title: "Status",
+    dataIndex: "status",
+  },
+  {
+    title: "Date",
+    dataIndex: "date",
+  },
+  {
+    title: "Product",
+    dataIndex: "product",
   },
   {
     title: "Action",
@@ -35,26 +50,28 @@ const Orders = () => {
 
   const orderState = useSelector((state) => state.auth.orders);
 
-  const data = orderState.map((order, index) => ({
-    key: index + 1,
-    title: order.title,
+  const data = orderState.map((order, i) => ({
+    key: i + 1,
+    name: "",
+    amount: order.paymentIntent.amount,
+    status: order.orderStatus,
+    date: new Date(order.createdAt).toLocaleString(),
+    product: <Link to={`/dashboard/order/${order._id}`}>View Order</Link>,
+
     action: (
       <>
-        <Link to="/" className="fs-5 text-primary">
-          <FaRegEdit />
-        </Link>
-
-        <Link to="/" className="ms-4 fs-5 " style={{ color: "#CC0000" }}>
-          <FaTrashCan />
-        </Link>
+        <EditButton />
+        <DeleteButton />
       </>
     ),
   }));
 
   return (
-    <div>
+    <>
+      {/* Page Title */}
       <h3 className="page-title mb-4">Orders</h3>
 
+      {/* Table */}
       {orderState.length > 0 ? (
         <div className="table-container">
           <Table columns={columns} dataSource={data} />
@@ -62,7 +79,8 @@ const Orders = () => {
       ) : (
         <Empty description="No data available" />
       )}
-    </div>
+      {/* Table End*/}
+    </>
   );
 };
 
