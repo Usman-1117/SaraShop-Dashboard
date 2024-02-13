@@ -20,6 +20,7 @@ import AddColor from "./pages/AddColor";
 import ColorList from "./pages/ColorList";
 
 import Orders from "./pages/Orders";
+import ViewOrder from "./pages/ViewOrder";
 
 import AddCoupon from "./pages/AddCoupon";
 import Couponlist from "./pages/Couponlist";
@@ -31,6 +32,7 @@ import BlogCatList from "./pages/BlogCatList";
 
 import Enquiries from "./pages/Enquiries";
 import ViewEnquiry from "./pages/ViewEnquiry";
+
 import NoPage from "./components/NoPage";
 
 const App = () => {
@@ -59,6 +61,7 @@ const App = () => {
             <Route path="color/:id" element={<AddColor />} />
             <Route path="color-list" element={<ColorList />} />
             <Route path="orders" element={<Orders />} />
+            <Route path="order/:id" element={<ViewOrder />} />
             <Route path="coupon" element={<AddCoupon />} />
             <Route path="coupon/:id" element={<AddCoupon />} />
             <Route path="coupon-list" element={<Couponlist />} />
