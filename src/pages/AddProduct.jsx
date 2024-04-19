@@ -225,9 +225,9 @@ const AddProduct = () => {
                 Select Tags
               </Select.Option>
 
-              <Select.Option value="Featured">Featured</Select.Option>
-              <Select.Option value="Special">Special</Select.Option>
-              <Select.Option value="Poplur">Poplur</Select.Option>
+              <Select.Option value="featured">featured</Select.Option>
+              <Select.Option value="special">special</Select.Option>
+              <Select.Option value="popular">popular</Select.Option>
             </Select>
             <ValidationError touched={touched.tags} errors={errors.tags} />
           </div>
@@ -258,6 +258,7 @@ const AddProduct = () => {
                 id="floatingQuantity"
                 name="quantity"
                 label="Enter Product Quantity"
+                value={values.quantity}
                 onChange={handleChange("quantity")}
                 onBlur={handleBlur("quantity")}
                 touched={touched.quantity}

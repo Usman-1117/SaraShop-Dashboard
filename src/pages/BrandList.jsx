@@ -1,4 +1,4 @@
-import { Empty, Table } from "antd";
+import { Table } from "antd";
 
 import EditButton from "../components/EditButton";
 import DeleteButton from "../components/DeleteButton";
@@ -46,10 +46,10 @@ const BrandList = () => {
     key: index + 1,
     name: brand.title,
     action: (
-      <>
+      <div className="d-flex">
         <EditButton to={`/dashboard/brand/${brand._id}`} />
         <DeleteButton onClick={() => showModal(brand._id)} />
-      </>
+      </div>
     ),
   }));
 
@@ -92,13 +92,11 @@ const BrandList = () => {
       </div>
       {/* Page Title & Add Button End*/}
 
-      {brandState.length > 0 ? (
-        <div className="table-container">
-          <Table columns={columns} dataSource={data} />
-        </div>
-      ) : (
-        <Empty description="No data available" />
-      )}
+      {/* Table */}
+      <div className="table-container">
+        <Table columns={columns} dataSource={data} />
+      </div>
+      {/* Table End*/}
 
       {/* Delete Funcationality */}
       <CustomModal

@@ -3,7 +3,7 @@ import productService from "./productService";
 
 // Get Products
 export const getAllProducts = createAsyncThunk(
-  "product/get-products",
+  "products/get-products",
   async (thunkAPI) => {
     try {
       return await productService.getProducts();

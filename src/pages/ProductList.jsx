@@ -1,4 +1,4 @@
-import { Table } from "antd";
+import { Table, Tag } from "antd";
 import { toast } from "react-toastify";
 import { RiEdit2Line } from "react-icons/ri";
 
@@ -20,7 +20,7 @@ const columns = [
     title: "Sr No.",
     dataIndex: "key",
     sorter: (a, b) => a.key - b.key,
-    width: 100,
+    // width: 100,
   },
   {
     title: "Title",
@@ -38,6 +38,7 @@ const columns = [
     dataIndex: "category",
     sorter: (a, b) => a.category.localeCompare(b.category),
   },
+
   {
     title: "Tags",
     dataIndex: "tags",
@@ -46,12 +47,13 @@ const columns = [
   {
     title: "Price",
     dataIndex: "price",
-    sorter: (a, b) => parseFloat(a.price) - parseFloat(b.price),
   },
   {
-    title: "Quantity",
-    dataIndex: "quantity",
-    sorter: (a, b) => parseFloat(a.stock) - parseFloat(b.stock),
+    title: "Sale Price",
+    dataIndex: "salePrice",
+    render: (text) => (
+      <Tag color="red" style={{ fontSize: "16px" }}>{`${text}`}</Tag>
+    ),
   },
   {
     title: "Action",
@@ -76,22 +78,23 @@ const ProductList = () => {
     title: product.title,
     brand: product.brand,
     category: product.category,
+    tags: product.tags,
     color: product.color,
     price: `Rs. ${product.price}`,
-    tags: product.tags,
-    quantity: product.quantity,
+    salePrice: `Rs. ${product.salePrice || product.price}`,
+
     action: (
-      <>
+      <div className="d-flex">
         <EditButton to={`/dashboard/product/${product._id}`} />
         <DeleteButton onClick={() => showModal(product._id)} />
-      </>
+      </div>
     ),
   }));
 
   // Delete A Product
   const showModal = (id) => {
-    setProductId(id);
     setOpen(true);
+    setProductId(id);
   };
   const hideModal = () => {
     setOpen(false);
